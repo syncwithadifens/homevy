@@ -1,6 +1,6 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-
-import '../../theme/styles.dart';
+import 'package:homevy/theme/styles.dart';
 
 class CustomProfile extends StatelessWidget {
   const CustomProfile({
@@ -9,21 +9,18 @@ class CustomProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        Container(
-          width: 103,
-          height: 103,
-          decoration:
-              BoxDecoration(shape: BoxShape.circle, color: primaryColor),
-        ),
-        Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(shape: BoxShape.circle, color: greyColor),
-        ),
-      ],
+    return DottedBorder(
+      borderType: BorderType.Circle,
+      dashPattern: const [20, 5],
+      color: greyColor,
+      child: Container(
+        height: 100,
+        width: 100,
+        decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+                image: AssetImage('assets/profile.png'), fit: BoxFit.cover)),
+      ),
     );
   }
 }

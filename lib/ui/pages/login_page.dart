@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homevy/controllers/login_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:get/get.dart';
 import 'package:homevy/ui/pages/register_page.dart';
@@ -8,6 +9,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -29,16 +31,20 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: TextField(
+                controller: loginController.emailCtrl,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 obscureText: false,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined),
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                    color: greyColor,
+                  ),
                   hintText: 'email',
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: greyColor,
+                  fillColor: lightGreyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -47,28 +53,40 @@ class LoginPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 10),
-              child: TextField(
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-                obscureText: false,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock),
-                  hintText: 'password',
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.visibility,
+              child: Obx(() => TextField(
+                    controller: loginController.passwordCtrl,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    obscureText: loginController.isHide.value,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: greyColor,
+                      ),
+                      hintText: 'password',
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          loginController.isHide.toggle();
+                        },
+                        icon: loginController.isHide.value
+                            ? Icon(
+                                Icons.visibility,
+                                color: greyColor,
+                              )
+                            : Icon(
+                                Icons.visibility,
+                                color: primaryColor,
+                              ),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      filled: true,
+                      fillColor: lightGreyColor,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none),
                     ),
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  filled: true,
-                  fillColor: greyColor,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none),
-                ),
-              ),
+                  )),
             ),
             Expanded(
               child: Align(
@@ -79,22 +97,29 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: Get.width,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: secondaryColor),
-              child: Center(
-                child: Text(
-                  'Login',
-                  style: subtitleStyle.copyWith(
-                      color: whiteColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
+            Obx(() => loginController.isLoading.value
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : GestureDetector(
+                    onTap: () => loginController.login(),
+                    child: Container(
+                      width: Get.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: secondaryColor),
+                      child: Center(
+                        child: Text(
+                          'Login',
+                          style: subtitleStyle.copyWith(
+                              color: whiteColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+                  )),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

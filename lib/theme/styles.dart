@@ -5,7 +5,8 @@ Color primaryColor = const Color(0xffFCA311);
 Color secondaryColor = const Color(0xff14213D);
 Color whiteColor = Colors.white;
 Color blackColor = Colors.black;
-Color greyColor = const Color(0xffF1F0F5);
+Color lightGreyColor = const Color(0xffF1F0F5);
+Color greyColor = Colors.grey;
 
 TextStyle titleStyle =
     GoogleFonts.concertOne(fontSize: 20, color: primaryColor);

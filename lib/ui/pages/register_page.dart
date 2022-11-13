@@ -36,12 +36,15 @@ class RegisterPage extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 obscureText: false,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.person),
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: greyColor,
+                  ),
                   hintText: 'full name',
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: greyColor,
+                  fillColor: lightGreyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -55,12 +58,15 @@ class RegisterPage extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 obscureText: false,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.phone_android),
+                  prefixIcon: Icon(
+                    Icons.phone_android,
+                    color: greyColor,
+                  ),
                   hintText: 'phone',
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: greyColor,
+                  fillColor: lightGreyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -74,12 +80,15 @@ class RegisterPage extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 obscureText: false,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined),
+                  prefixIcon: Icon(
+                    Icons.email_outlined,
+                    color: greyColor,
+                  ),
                   hintText: 'email',
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: greyColor,
+                  fillColor: lightGreyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -93,7 +102,10 @@ class RegisterPage extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 obscureText: false,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: greyColor,
+                  ),
                   hintText: 'password',
                   suffixIcon: IconButton(
                     onPressed: () {},
@@ -104,7 +116,7 @@ class RegisterPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: greyColor,
+                  fillColor: lightGreyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -119,7 +131,10 @@ class RegisterPage extends StatelessWidget {
                   textInputAction: TextInputAction.done,
                   obscureText: false,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.lock),
+                    prefixIcon: Icon(
+                      Icons.lock_reset,
+                      color: greyColor,
+                    ),
                     hintText: 'password confirmation',
                     suffixIcon: IconButton(
                       onPressed: () {},
@@ -130,7 +145,7 @@ class RegisterPage extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     filled: true,
-                    fillColor: greyColor,
+                    fillColor: lightGreyColor,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide.none),
@@ -146,7 +161,7 @@ class RegisterPage extends StatelessWidget {
                   color: secondaryColor),
               child: Center(
                 child: Text(
-                  'Join Now',
+                  'Join',
                   style: subtitleStyle.copyWith(
                       color: Colors.white,
                       fontSize: 20,
@@ -158,7 +173,7 @@ class RegisterPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Join us before?',
+                  'Already have an a account?',
                   style: subtitleStyle,
                 ),
                 TextButton(
