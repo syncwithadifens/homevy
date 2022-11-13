@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:get/get.dart';
 
+import '../widgets/custom_profile.dart';
+
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
@@ -26,12 +28,7 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: greyColor,
-              ),
-            ),
+            const Center(child: CustomProfile()),
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: TextField(
