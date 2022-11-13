@@ -15,9 +15,9 @@ class RegisterPage extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: blackColor,
             )),
         elevation: 0,
       ),
@@ -26,10 +26,10 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
               child: CircleAvatar(
                 radius: 50,
-                backgroundColor: Color(0xffF1F0F5),
+                backgroundColor: greyColor,
               ),
             ),
             Padding(
@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: const Color(0xffF1F0F5),
+                  fillColor: greyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -63,7 +63,7 @@ class RegisterPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: const Color(0xffF1F0F5),
+                  fillColor: greyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -82,7 +82,7 @@ class RegisterPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: const Color(0xffF1F0F5),
+                  fillColor: greyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -107,7 +107,7 @@ class RegisterPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: const Color(0xffF1F0F5),
+                  fillColor: greyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -133,7 +133,7 @@ class RegisterPage extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     filled: true,
-                    fillColor: const Color(0xffF1F0F5),
+                    fillColor: greyColor,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide.none),

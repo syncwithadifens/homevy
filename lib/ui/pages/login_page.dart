@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: const Color(0xffF1F0F5),
+                  fillColor: greyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
-                  fillColor: const Color(0xffF1F0F5),
+                  fillColor: greyColor,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none),
@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                 child: Text(
                   'Login',
                   style: subtitleStyle.copyWith(
-                      color: Colors.white,
+                      color: whiteColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w700),
                 ),
