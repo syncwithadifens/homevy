@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homevy/controllers/login_controller.dart';
+import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:get/get.dart';
 import 'package:homevy/ui/pages/register_page.dart';
@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
+    final authController = Get.put(AuthController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: TextField(
-                controller: loginController.emailCtrl,
+                controller: authController.emailCtrl,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 obscureText: false,
@@ -54,10 +54,10 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 10),
               child: Obx(() => TextField(
-                    controller: loginController.passwordCtrl,
+                    controller: authController.passwordCtrl,
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
-                    obscureText: loginController.isHide.value,
+                    obscureText: authController.isHide.value,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.lock,
@@ -66,9 +66,9 @@ class LoginPage extends StatelessWidget {
                       hintText: 'password',
                       suffixIcon: IconButton(
                         onPressed: () {
-                          loginController.isHide.toggle();
+                          authController.isHide.toggle();
                         },
-                        icon: loginController.isHide.value
+                        icon: authController.isHide.value
                             ? Icon(
                                 Icons.visibility,
                                 color: greyColor,
@@ -97,12 +97,12 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(() => loginController.isLoading.value
+            Obx(() => authController.isLoading.value
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : GestureDetector(
-                    onTap: () => loginController.login(),
+                    onTap: () => authController.login(),
                     child: Container(
                       width: Get.width,
                       height: 50,

@@ -14,7 +14,7 @@ class AuthService {
     if (response.statusCode == 200 || response.statusCode == 400) {
       return UserModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('gagal mendapat data');
+      throw Exception('Gagal mendapat data');
     }
   }
 
@@ -27,10 +27,10 @@ class AuthService {
       'password': password,
       'password_confirmation': passwordConfirm
     });
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 400) {
       return UserModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('gagal');
+      throw Exception('Gagal mendapat data');
     }
   }
 }

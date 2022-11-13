@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authController = Get.find<AuthController>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -32,6 +34,7 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: TextField(
+                controller: authController.nameCtrl,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 obscureText: false,
@@ -54,6 +57,7 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: TextField(
+                controller: authController.phoneCtrl,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 obscureText: false,
@@ -76,6 +80,7 @@ class RegisterPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: TextField(
+                controller: authController.emailCtrl,
                 keyboardType: TextInputType.visiblePassword,
                 textInputAction: TextInputAction.done,
                 obscureText: false,
@@ -97,78 +102,89 @@ class RegisterPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: TextField(
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-                obscureText: false,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: greyColor,
-                  ),
-                  hintText: 'password',
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.visibility,
+              child: Obx(() => TextField(
+                    controller: authController.passwordCtrl,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    obscureText: authController.isHide.value,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: greyColor,
+                      ),
+                      hintText: 'password',
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          authController.isHide.toggle();
+                        },
+                        icon: authController.isHide.value
+                            ? Icon(
+                                Icons.visibility,
+                                color: greyColor,
+                              )
+                            : Icon(
+                                Icons.visibility,
+                                color: primaryColor,
+                              ),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      filled: true,
+                      fillColor: lightGreyColor,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none),
                     ),
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  filled: true,
-                  fillColor: lightGreyColor,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none),
-                ),
-              ),
+                  )),
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
-                child: TextField(
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.lock_reset,
-                      color: greyColor,
-                    ),
-                    hintText: 'password confirmation',
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.visibility,
+                child: Obx(() => TextField(
+                      controller: authController.passwordConfirmCtrl,
+                      keyboardType: TextInputType.visiblePassword,
+                      textInputAction: TextInputAction.done,
+                      obscureText: authController.isHide.value,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.lock_reset,
+                          color: greyColor,
+                        ),
+                        hintText: 'password confirmation',
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        filled: true,
+                        fillColor: lightGreyColor,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none),
+                      ),
+                    )),
+              ),
+            ),
+            Obx(() => authController.isLoading.value
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : GestureDetector(
+                    onTap: () => authController.register(),
+                    child: Container(
+                      width: Get.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: secondaryColor),
+                      child: Center(
+                        child: Text(
+                          'Join',
+                          style: subtitleStyle.copyWith(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 20),
-                    filled: true,
-                    fillColor: lightGreyColor,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              width: Get.width,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: secondaryColor),
-              child: Center(
-                child: Text(
-                  'Join',
-                  style: subtitleStyle.copyWith(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
+                  )),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
