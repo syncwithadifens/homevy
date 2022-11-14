@@ -32,7 +32,7 @@ class RegisterPage extends StatelessWidget {
           mobile: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: CustomProfile()),
+              const Center(child: CustomProfile()),
               Padding(
                 padding: const EdgeInsets.only(top: 40),
                 child: TextField(
@@ -216,7 +216,7 @@ class RegisterPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomProfile(
+                      const CustomProfile(
                         h: 200,
                         w: 200,
                       ),

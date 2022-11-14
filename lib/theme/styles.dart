@@ -7,12 +7,10 @@ Color whiteColor = Colors.white;
 Color blackColor = Colors.black;
 Color lightGreyColor = const Color(0xffF1F0F5);
 Color greyColor = Colors.grey;
-Color backgroundColor = Color(0xffF3F3F3);
+Color backgroundColor = const Color(0xffF3F3F3);
 
 TextStyle titleStyle =
     GoogleFonts.concertOne(fontSize: 20, color: primaryColor);
 TextStyle subtitleStyle = GoogleFonts.nunito(fontSize: 16);
 TextStyle taglineStyle =
     GoogleFonts.pacifico(fontSize: 18, color: secondaryColor);
-
-
