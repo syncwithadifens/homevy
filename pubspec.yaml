@@ -34,6 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
+  get_storage: ^2.0.3
   google_fonts: ^3.0.1
   http: ^0.13.5
 

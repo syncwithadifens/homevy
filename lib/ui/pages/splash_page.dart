@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:get/get.dart';
+import 'package:homevy/ui/pages/home_page.dart';
 
 import 'login_page.dart';
 
@@ -9,9 +11,13 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // NOTE: Mengecek apakah user pernah login atau belum
+    final authController = Get.put(AuthController());
     Future.delayed(
-      const Duration(seconds: 3),
-      () => Get.off(() => const LoginPage()),
+      const Duration(seconds: 2),
+      () => Get.off(() => authController.userData != null
+          ? const HomePage()
+          : const LoginPage()),
     );
     return Scaffold(
       body: Center(

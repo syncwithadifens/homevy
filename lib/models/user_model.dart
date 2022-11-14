@@ -24,11 +24,13 @@ class UserModel {
 
 class Data {
   User? user;
+  String? token;
 
-  Data({this.user});
+  Data({this.user, this.token});
 
   Data.fromJson(Map<String, dynamic> json) {
     user = json['user'] != null ? User.fromJson(json['user']) : null;
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -36,43 +38,52 @@ class Data {
     if (user != null) {
       data['user'] = user!.toJson();
     }
+    data['token'] = token;
     return data;
   }
 }
 
 class User {
-  String? name;
-  String? handphone;
-  String? email;
-  String? updatedAt;
-  String? createdAt;
   int? id;
+  String? name;
+  String? email;
+  String? emailVerifiedAt;
+  String? handphone;
+  String? createdAt;
+  String? updatedAt;
+  String? role;
 
   User(
-      {this.name,
-      this.handphone,
+      {this.id,
+      this.name,
       this.email,
-      this.updatedAt,
+      this.emailVerifiedAt,
+      this.handphone,
       this.createdAt,
-      this.id});
+      this.updatedAt,
+      this.role});
 
   User.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    handphone = json['handphone'];
-    email = json['email'];
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
     id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    emailVerifiedAt = json['email_verified_at'];
+    handphone = json['handphone'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    role = json['role'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['handphone'] = handphone;
-    data['email'] = email;
-    data['updated_at'] = updatedAt;
-    data['created_at'] = createdAt;
     data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['email_verified_at'] = emailVerifiedAt;
+    data['handphone'] = handphone;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['role'] = role;
     return data;
   }
 }
