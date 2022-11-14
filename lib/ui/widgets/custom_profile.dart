@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:homevy/theme/styles.dart';
 
 class CustomProfile extends StatelessWidget {
-  const CustomProfile({
-    Key? key,
-  }) : super(key: key);
-
+  CustomProfile({Key? key, this.w = 100, this.h = 100}) : super(key: key);
+  double w, h;
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
@@ -14,8 +12,8 @@ class CustomProfile extends StatelessWidget {
       dashPattern: const [20, 5],
       color: greyColor,
       child: Container(
-        height: 100,
-        width: 100,
+        height: h,
+        width: w,
         decoration: const BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
