@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/models/product_model.dart';
 import 'package:homevy/services/product_service.dart';
+import 'package:http/http.dart';
 
 class ProductController extends GetxController {
-  ProductService productService = ProductService();
+  ProductService productService = ProductService(Client());
   late ProductModel productData;
   final isLoading = false.obs;
 

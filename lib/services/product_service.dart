@@ -3,7 +3,9 @@ import 'package:homevy/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {
+  ProductService(this.client);
   final apiUrl = AuthService.apiUrl;
+  final http.Client client;
 
   Future<ProductModel> getProductByCategory({String? token}) async {
     final response = await http.get(Uri.parse('$apiUrl/api/category/22'),
