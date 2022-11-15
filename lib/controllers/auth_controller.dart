@@ -135,7 +135,7 @@ class AuthController extends GetxController {
     GetStorage box = GetStorage();
     if (box.read('userData') != null) {
       userData = UserModel.fromJson(jsonDecode(box.read("userData")));
+      token = userData!.data!.token;
     }
-    token = userData!.data!.token;
   }
 }

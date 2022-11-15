@@ -14,7 +14,7 @@ class CartPage extends StatelessWidget {
           child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: Row(
               children: [
                 Container(
@@ -22,13 +22,21 @@ class CartPage extends StatelessWidget {
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 5),
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                            color: greyColor)
+                      ]),
                   child: IconButton(
                       padding: EdgeInsets.zero,
                       iconSize: 30,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.back();
+                      },
                       icon: const Icon(
                         Icons.chevron_left,
                       )),

@@ -24,13 +24,21 @@ class ProfilePage extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: const Offset(0, 5),
+                                spreadRadius: 1,
+                                blurRadius: 3,
+                                color: blackColor)
+                          ]),
                       child: IconButton(
                           padding: EdgeInsets.zero,
                           iconSize: 30,
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.back();
+                          },
                           icon: const Icon(
                             Icons.chevron_left,
                           )),
