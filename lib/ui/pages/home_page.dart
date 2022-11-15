@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.people,
+                Icons.man,
                 color: blackColor,
               ),
               label: 'Profile',
