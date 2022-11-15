@@ -36,9 +36,8 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20),
                 child: TextField(
                   controller: authController.emailCtrl,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  obscureText: false,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -162,9 +161,8 @@ class LoginPage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 40),
                       child: TextField(
                         controller: authController.emailCtrl,
-                        keyboardType: TextInputType.visiblePassword,
-                        textInputAction: TextInputAction.done,
-                        obscureText: false,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email_outlined,

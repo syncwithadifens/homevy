@@ -37,9 +37,8 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 40),
                 child: TextField(
                   controller: authController.nameCtrl,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  obscureText: false,
+                  keyboardType: TextInputType.name,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.person,
@@ -60,9 +59,8 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20),
                 child: TextField(
                   controller: authController.phoneCtrl,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  obscureText: false,
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.phone_android,
@@ -83,9 +81,8 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 20),
                 child: TextField(
                   controller: authController.emailCtrl,
-                  keyboardType: TextInputType.visiblePassword,
-                  textInputAction: TextInputAction.done,
-                  obscureText: false,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -253,9 +250,8 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 40),
                       child: TextField(
                         controller: authController.nameCtrl,
-                        keyboardType: TextInputType.visiblePassword,
-                        textInputAction: TextInputAction.done,
-                        obscureText: false,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.person,
@@ -276,9 +272,8 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20),
                       child: TextField(
                         controller: authController.phoneCtrl,
-                        keyboardType: TextInputType.visiblePassword,
-                        textInputAction: TextInputAction.done,
-                        obscureText: false,
+                        keyboardType: TextInputType.phone,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.phone_android,
@@ -299,9 +294,8 @@ class RegisterPage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 20),
                       child: TextField(
                         controller: authController.emailCtrl,
-                        keyboardType: TextInputType.visiblePassword,
-                        textInputAction: TextInputAction.done,
-                        obscureText: false,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.email_outlined,
