@@ -1,14 +1,11 @@
 import 'package:homevy/models/product_model.dart';
 import 'package:homevy/services/auth_service.dart';
-import 'package:http/http.dart' as http;
 
 class ProductService {
-  ProductService(this.client);
   final apiUrl = AuthService.apiUrl;
-  final http.Client client;
 
-  Future<ProductModel> getProductByCategory({String? token}) async {
-    final response = await http.get(Uri.parse('$apiUrl/api/category/22'),
+  Future<ProductModel> getProductByCategory(String? token, var client) async {
+    final response = await client.get(Uri.parse('$apiUrl/api/category/22'),
         headers: {'Authorization': 'Bearer $token'});
     if (response.statusCode == 200) {
       return productModelFromJson(response.body);

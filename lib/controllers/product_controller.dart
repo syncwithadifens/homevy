@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/models/product_model.dart';
 import 'package:homevy/services/product_service.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class ProductController extends GetxController {
-  ProductService productService = ProductService(Client());
+  ProductService productService = ProductService();
   late ProductModel productData;
   final isLoading = false.obs;
 
@@ -14,7 +14,7 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       productData = await productService.getProductByCategory(
-          token: AuthController.token);
+          AuthController.token, http.Client);
       if (productData.info == 'Category Berhasil Diambil') {
         isLoading.value = false;
       }
