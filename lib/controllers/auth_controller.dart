@@ -18,6 +18,7 @@ class AuthController extends GetxController {
   final phoneCtrl = TextEditingController();
   final isLoading = false.obs;
   UserModel? userData;
+  static String? token;
   String? message;
 
   Future<void> login() async {
@@ -34,6 +35,7 @@ class AuthController extends GetxController {
       GetStorage box = GetStorage();
       String storeUserData = json.encode(userCredential);
       box.write("userData", storeUserData);
+      userData = UserModel.fromJson(jsonDecode(box.read("userData")));
       Future.delayed(
         const Duration(seconds: 2),
         () {
@@ -117,6 +119,15 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<void> logout() async {
+    GetStorage box = GetStorage();
+    box.erase();
+    userData = null;
+    if (userData == null) {
+      Get.offAll(() => const LoginPage());
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
@@ -125,5 +136,6 @@ class AuthController extends GetxController {
     if (box.read('userData') != null) {
       userData = UserModel.fromJson(jsonDecode(box.read("userData")));
     }
+    token = userData!.data!.token;
   }
 }
