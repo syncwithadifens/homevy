@@ -206,7 +206,7 @@ class ProfilePage extends StatelessWidget {
                           },
                           child: Container(
                             margin: const EdgeInsets.only(bottom: 10),
-                            width: Get.width,
+                            width: MediaQuery.of(context).size.width,
                             height: 50,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
