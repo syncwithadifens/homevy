@@ -18,6 +18,7 @@ class AuthController extends GetxController {
   final phoneCtrl = TextEditingController();
   final isLoading = false.obs;
   UserModel? userData;
+  static String? token;
   String? message;
 
   Future<void> login() async {
@@ -135,5 +136,6 @@ class AuthController extends GetxController {
     if (box.read('userData') != null) {
       userData = UserModel.fromJson(jsonDecode(box.read("userData")));
     }
+    token = userData!.data!.token;
   }
 }
