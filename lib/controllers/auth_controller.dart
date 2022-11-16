@@ -36,6 +36,7 @@ class AuthController extends GetxController {
       String storeUserData = json.encode(userCredential);
       box.write("userData", storeUserData);
       userData = UserModel.fromJson(jsonDecode(box.read("userData")));
+      token = userData!.data!.token;
       Future.delayed(
         const Duration(seconds: 2),
         () {
@@ -120,11 +121,14 @@ class AuthController extends GetxController {
   }
 
   Future<void> logout() async {
-    GetStorage box = GetStorage();
-    box.erase();
-    userData = null;
-    if (userData == null) {
-      Get.offAll(() => const LoginPage());
+    final userCredential = await authService.signOut();
+    if (userCredential == 'Berhasil Logout') {
+      GetStorage box = GetStorage();
+      box.erase();
+      userData = null;
+      if (userData == null) {
+        Get.offAll(() => const LoginPage());
+      }
     }
   }
 

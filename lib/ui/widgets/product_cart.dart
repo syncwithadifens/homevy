@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homevy/models/cart_model.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:intl/intl.dart';
 
 class ProductCart extends StatelessWidget {
-  const ProductCart({
-    Key? key,
-  }) : super(key: key);
-
+  const ProductCart({Key? key, required this.cardList}) : super(key: key);
+  final Datum cardList;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,8 +25,9 @@ class ProductCart extends StatelessWidget {
               decoration: BoxDecoration(
                   color: bgColor,
                   borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                      image: AssetImage('assets/chair.png'))),
+                  image: DecorationImage(
+                      image: NetworkImage(cardList.product.image),
+                      fit: BoxFit.cover)),
             ),
             Expanded(
               child: Padding(
@@ -37,14 +38,18 @@ class ProductCart extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Kursi kantor',
+                            cardList.product.name,
                             style: subtitleStyle.copyWith(
                                 fontSize: 22, fontWeight: FontWeight.w700),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 20),
                             child: Text(
-                              'Rp3.500.000',
+                              NumberFormat.currency(
+                                      locale: 'id',
+                                      symbol: 'Rp',
+                                      decimalDigits: 2)
+                                  .format(cardList.product.harga),
                               style: subtitleStyle.copyWith(
                                   color: primaryColor,
                                   fontSize: 14,
@@ -79,7 +84,7 @@ class ProductCart extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '3',
+                                '${cardList.qty}',
                                 style: subtitleStyle.copyWith(
                                   fontWeight: FontWeight.w700,
                                   color: whiteColor,
