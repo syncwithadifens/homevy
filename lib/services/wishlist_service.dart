@@ -12,6 +12,8 @@ class WishlistService {
     if (response.statusCode == 200) {
       return wishlistModelFromJson(response.body);
     } else {
+      print(AuthController.token);
+
       throw Exception('Gagal mendapat data');
     }
   }
