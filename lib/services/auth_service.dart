@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,6 +32,16 @@ class AuthService {
       return UserModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Gagal mendapat data');
+    }
+  }
+
+  Future<String> signOut() async {
+    final response = await http.post(Uri.parse('$apiUrl/api/logout'),
+        headers: {'Authorization': 'Bearer ${AuthController.token}'});
+    if (response.statusCode == 200) {
+      return 'Berhasil Logout';
+    } else {
+      throw Exception('Gagal Logout');
     }
   }
 }

@@ -121,11 +121,14 @@ class AuthController extends GetxController {
   }
 
   Future<void> logout() async {
-    GetStorage box = GetStorage();
-    box.erase();
-    userData = null;
-    if (userData == null) {
-      Get.offAll(() => const LoginPage());
+    final userCredential = await authService.signOut();
+    if (userCredential == 'Berhasil Logout') {
+      GetStorage box = GetStorage();
+      box.erase();
+      userData = null;
+      if (userData == null) {
+        Get.offAll(() => const LoginPage());
+      }
     }
   }
 
