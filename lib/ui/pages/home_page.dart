@@ -102,7 +102,7 @@ class HomePage extends StatelessWidget {
             child: Text(
               'Category',
               style: blackTextStyle.copyWith(
-                fontSize: 22,
+                fontSize: 23,
                 fontWeight: bold,
               ),
             ),
