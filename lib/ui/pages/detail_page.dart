@@ -164,7 +164,7 @@ class DetailPage extends StatelessWidget {
                   color: Colors.white,),
               ),
                 Text(
-                  'Proceed to checkout',
+                  'Add to Cart',
                   style: subtitleStyle.copyWith(
                   color: whiteColor),
               ),
