@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.only(
-                    top: 21,
+                    top: 20,
                     left: 24,
                     right: 24,
                   ),
