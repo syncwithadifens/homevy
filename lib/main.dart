@@ -15,11 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
-      home:SplashPage(),
-=======
       home: SplashPage(),
->>>>>>> c126b0e98bee0d08274088988afca0e308d126df
     );
   }
 }
