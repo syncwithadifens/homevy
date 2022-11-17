@@ -57,61 +57,41 @@ class ProductCart extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      cartController.removeFromCart(cardList.id);
-                    },
-                    icon: const Icon(Icons.delete),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 35,
-                    decoration: BoxDecoration(
-                        color: secondaryColor,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: whiteColor),
-                          child: IconButton(
-                            iconSize: 20,
-                            padding: EdgeInsets.zero,
-                            onPressed: () {},
-                            icon: const Icon(Icons.remove),
-                            color: blackColor,
-                          ),
+                        const Icon(Icons.edit_note_rounded),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: GestureDetector(
+                              onTap: () =>
+                                  cartController.removeFromCart(cardList.id),
+                              child: const Icon(Icons.delete)),
                         ),
-                        Text(
-                          '${cardList.qty}',
+                      ],
+                    ),
+                    const Spacer(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: secondaryColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                        child: Text(
+                          '${cardList.qty} x',
                           style: subtitleStyle.copyWith(
                             fontWeight: FontWeight.w700,
                             color: whiteColor,
                           ),
                         ),
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: whiteColor),
-                          child: IconButton(
-                            iconSize: 20,
-                            padding: EdgeInsets.zero,
-                            onPressed: () {},
-                            icon: const Icon(Icons.add),
-                            color: blackColor,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           )),

@@ -4,6 +4,7 @@ import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/checkout_page.dart';
 import 'package:homevy/ui/widgets/product_cart.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -126,7 +127,12 @@ class CartPage extends StatelessWidget {
                                                     color: greyColor),
                                               ),
                                               Text(
-                                                'in progress',
+                                                NumberFormat.currency(
+                                                        locale: 'id',
+                                                        symbol: 'Rp',
+                                                        decimalDigits: 2)
+                                                    .format(cartController
+                                                        .total.value),
                                                 style: subtitleStyle.copyWith(
                                                     color: primaryColor,
                                                     fontSize: 14,
@@ -144,13 +150,13 @@ class CartPage extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                'Shiping Cost',
+                                                'Shipping Cost',
                                                 style: subtitleStyle.copyWith(
                                                     fontWeight: FontWeight.w500,
                                                     color: greyColor),
                                               ),
                                               Text(
-                                                'in progress',
+                                                'free',
                                                 style: subtitleStyle.copyWith(
                                                     color: primaryColor,
                                                     fontSize: 14,
@@ -173,7 +179,12 @@ class CartPage extends StatelessWidget {
                                                   fontWeight: FontWeight.w700),
                                             ),
                                             Text(
-                                              'in progress',
+                                              NumberFormat.currency(
+                                                      locale: 'id',
+                                                      symbol: 'Rp',
+                                                      decimalDigits: 2)
+                                                  .format(cartController
+                                                      .total.value),
                                               style: subtitleStyle.copyWith(
                                                   color: primaryColor,
                                                   fontSize: 14,

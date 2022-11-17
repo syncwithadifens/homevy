@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homevy/controllers/product_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/cart_page.dart';
 import 'package:homevy/ui/pages/profile_page.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
     return Scaffold(
       backgroundColor: bgColor,
       bottomNavigationBar: BottomNavigationBar(
@@ -30,7 +32,7 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: IconButton(
                 onPressed: () {
-                  Get.to(() => const Wishlist());
+                  Get.to(() => const WishlistPage());
                 },
                 icon: Icon(Icons.favorite, color: blackColor)),
             label: 'Wishlist',
@@ -109,38 +111,33 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                top: 25,
-              ),
-              child: CarouselSlider(
-                items: const [
-                  HomeCategoryItem(
-                    title: 'Chair',
-                    subtitle: 'Sahaja, Kiya Dinning...',
-                    imageUrl: 'assets/chair.png',
-                  ),
-                  HomeCategoryItem(
-                    title: 'Table',
-                    subtitle: 'Sahaja, Kiya Dinning...',
-                    imageUrl: 'assets/table.png',
-                  ),
-                  HomeCategoryItem(
-                    title: 'Chair',
-                    subtitle: 'Sahaja, Kiya Dinning...',
-                    imageUrl: 'assets/chair.png',
-                  ),
-                  HomeCategoryItem(
-                    title: 'Table',
-                    subtitle: 'Sahaja, Kiya Dinning...',
-                    imageUrl: 'assets/table.png',
-                  ),
-                ],
-                options: CarouselOptions(
-                  height: 148,
-                  enableInfiniteScroll: false,
-                  viewportFraction: 1,
+            CarouselSlider(
+              items: const [
+                HomeCategoryItem(
+                  title: 'Chair',
+                  subtitle: 'Sahaja, Kiya Dinning...',
+                  imageUrl: 'assets/chair.png',
                 ),
+                HomeCategoryItem(
+                  title: 'Table',
+                  subtitle: 'Sahaja, Kiya Dinning...',
+                  imageUrl: 'assets/table.png',
+                ),
+                HomeCategoryItem(
+                  title: 'Chair',
+                  subtitle: 'Sahaja, Kiya Dinning...',
+                  imageUrl: 'assets/chair.png',
+                ),
+                HomeCategoryItem(
+                  title: 'Table',
+                  subtitle: 'Sahaja, Kiya Dinning...',
+                  imageUrl: 'assets/table.png',
+                ),
+              ],
+              options: CarouselOptions(
+                height: 148,
+                enableInfiniteScroll: false,
+                viewportFraction: 1,
               ),
             ),
             Container(
@@ -157,82 +154,113 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 5,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    mainAxisExtent: 250),
-                itemBuilder: (context, index) {
-                  return Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: whiteColor,
-                          boxShadow: [
-                            BoxShadow(
-                                offset: const Offset(0, 5),
-                                spreadRadius: 1,
-                                blurRadius: 3,
-                                color: greyColor),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Image.asset('assets/chair.png'),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Row(
+            Obx(() => productController.isLoading.value
+                ? const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: GridView.builder(
+                        itemCount:
+                            productController.productData!.data.products.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                mainAxisExtent: 200),
+                        itemBuilder: (context, index) {
+                          return Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: whiteColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        offset: const Offset(0, 5),
+                                        spreadRadius: 1,
+                                        blurRadius: 3,
+                                        color: greyColor),
+                                  ],
+                                ),
+                                child: Column(
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'kursi',
-                                          style: subtitleStyle.copyWith(
-                                              fontWeight: FontWeight.w700),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Image.network(productController
+                                            .productData!
+                                            .data
+                                            .products[index]
+                                            .image),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  productController
+                                                      .productData!
+                                                      .data
+                                                      .products[index]
+                                                      .name,
+                                                  style: subtitleStyle.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                    NumberFormat.currency(
+                                                            locale: 'id',
+                                                            symbol: 'Rp',
+                                                            decimalDigits: 2)
+                                                        .format(
+                                                            productController
+                                                                .productData!
+                                                                .data
+                                                                .products[index]
+                                                                .harga),
+                                                    style:
+                                                        subtitleStyle.copyWith(
+                                                            color: primaryColor,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: Text(
-                                            NumberFormat.currency(
-                                                    locale: 'id',
-                                                    symbol: 'Rp',
-                                                    decimalDigits: 2)
-                                                .format(500000),
-                                            style: subtitleStyle.copyWith(
-                                                color: primaryColor,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          );
+                        },
                       ),
-                    ],
-                  );
-                },
-              ),
-            ),
+                    ),
+                  )),
           ],
         ),
       ),

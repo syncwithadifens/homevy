@@ -4,6 +4,7 @@ import 'package:homevy/controllers/cart_controller.dart';
 import 'package:homevy/controllers/transaction_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/widgets/product_cart.dart';
+import 'package:intl/intl.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
@@ -13,6 +14,7 @@ class CheckoutPage extends StatelessWidget {
     final cartController = Get.find<CartController>();
     final transactionController = Get.put(TransactionController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,18 +58,20 @@ class CheckoutPage extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-              child: Text('Shipping address'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: Text('Shipping address',
+                  style: subtitleStyle.copyWith(fontWeight: FontWeight.w700)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
                 controller: transactionController.shippingAddress,
-                keyboardType: TextInputType.multiline,
+                keyboardType: TextInputType.streetAddress,
                 maxLines: 4,
                 textAlign: TextAlign.justify,
                 decoration: InputDecoration(
+                  hintText: 'Your address',
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   filled: true,
@@ -78,9 +82,37 @@ class CheckoutPage extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-              child: Text('Payment Method'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total Payment',
+                    style: subtitleStyle.copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  Obx(() => cartController.cartData!.data.isEmpty
+                      ? Text('0',
+                          style: subtitleStyle.copyWith(
+                              color: primaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700))
+                      : Text(
+                          NumberFormat.currency(
+                                  locale: 'id', symbol: 'Rp', decimalDigits: 2)
+                              .format(cartController.total.value),
+                          style: subtitleStyle.copyWith(
+                              color: primaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700),
+                        )),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Text('Payment Method',
+                  style: subtitleStyle.copyWith(fontWeight: FontWeight.w700)),
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -100,16 +132,25 @@ class CheckoutPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: cartController.cartData!.data.length,
-                itemBuilder: (context, index) {
-                  return ProductCart(
-                    cardList: cartController.cartData!.data[index],
-                  );
-                },
-              ),
-            ),
+            Obx(() => cartController.isLoading.value
+                ? const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : cartController.cartData!.data.isEmpty
+                    ? const Expanded(
+                        child: Center(child: Text('No item in cart')))
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: cartController.cartData!.data.length,
+                          itemBuilder: (context, index) {
+                            return ProductCart(
+                              cardList: cartController.cartData!.data[index],
+                            );
+                          },
+                        ),
+                      )),
             GestureDetector(
               onTap: () {
                 transactionController.createTransaction();

@@ -5,8 +5,8 @@ import 'package:homevy/controllers/wishlist_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:intl/intl.dart';
 
-class Wishlist extends StatelessWidget {
-  const Wishlist({super.key});
+class WishlistPage extends StatelessWidget {
+  const WishlistPage({super.key});
 
   @override
   Widget build(BuildContext context) {

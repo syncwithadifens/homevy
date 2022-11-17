@@ -9,13 +9,22 @@ class CartController extends GetxController {
   CartModel? cartData;
   final isLoading = false.obs;
   final quantity = 1.obs;
-
+  final total = 0.obs;
   Future<void> getCart() async {
     try {
       isLoading.value = true;
       cartData = await cartService.getCartItem();
       if (cartData!.info == 'Keranjang Berhasil Diambil') {
         isLoading.value = false;
+        List listPrice = [];
+        if (cartData!.data.isNotEmpty) {
+          for (var i = 0; i < cartData!.data.length; i++) {
+            final int subtotal;
+            subtotal = cartData!.data[i].product.harga * cartData!.data[i].qty;
+            listPrice.add(subtotal);
+          }
+          total.value = listPrice.reduce((value, element) => value + element);
+        }
       }
     } catch (e) {
       debugPrint(e.toString());

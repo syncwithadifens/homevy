@@ -25,9 +25,7 @@ void main() {
           200)));
 
       expect(
-          await ProductService().getProductByCategory(
-              '623|IXH9uWlUoSG5HcWWAB1SuqzUzYW1ttPHXfWAixqI', client),
-          isA<ProductModel>());
+          await ProductService().getProductByCategory(), isA<ProductModel>());
     });
   });
 }
