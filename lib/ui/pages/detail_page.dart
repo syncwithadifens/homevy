@@ -1,242 +1,244 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homevy/controllers/cart_controller.dart';
+import 'package:homevy/controllers/wishlist_controller.dart';
+import 'package:homevy/models/product_model.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
-
+  const DetailPage({super.key, required this.productDetail});
+  final Product productDetail;
   @override
   Widget build(BuildContext context) {
+    final wishlistController = Get.put(WishlistController());
+    final cartController = Get.put(CartController());
     return Scaffold(
-      backgroundColor: const Color(0xffe7e7e7),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.chevron_left,
-              color: blackColor,
-            )),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(CupertinoIcons.heart),
-            color: blackColor,
-            onPressed: () {},
-          ),
-        ],
-        elevation: 0,
-      ),
-      body: Container(
-          padding: const EdgeInsets.all(20),
+      backgroundColor: whiteColor,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
-            children: <Widget>[
-              SizedBox(
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 270, 0, 0),
-                      height: 300,
-                      padding: const EdgeInsets.all(15),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
-                            bottomLeft: Radius.circular(24),
-                            bottomRight: Radius.circular(24)),
-                      ),
-                      child: Column(children: [
-                        Row(
-                          children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                RichText(
-                                  text: const TextSpan(children: [
-                                    TextSpan(
-                                        text: "Chair\n",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black)),
-                                    TextSpan(
-                                        text: "Sahaja Chair",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                            Expanded(
-                                child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 3,
-                                          blurRadius: 10,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ]),
-                                  child: const Icon(
-                                    CupertinoIcons.minus,
-                                    size: 15,
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: const Text(
-                                    "01",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 3,
-                                          blurRadius: 10,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ]),
-                                  child: const Icon(
-                                    CupertinoIcons.plus,
-                                    size: 15,
-                                  ),
-                                )
-                              ],
-                            ))
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Text(
-                                "..............................................................................")
-                          ],
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Row(
-                                  children: const <Widget>[
-                                    Text("Description\n",
-                                        style: TextStyle(fontSize: 14)),
-                                  ],
-                                ),
-                                Row(
-                                  children: const <Widget>[
-                                    Text("Penjelasan Product",
-                                        style: TextStyle(fontSize: 14)),
-                                  ],
-                                )
-                              ],
-                            )),
-                        const Spacer(),
-                        Container(
-                          height: 40,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          width: Get.width,
-                          decoration: BoxDecoration(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: const Offset(0, 5),
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              color: greyColor)
+                        ]),
+                    child: IconButton(
+                        padding: EdgeInsets.zero,
+                        iconSize: 30,
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(
+                          Icons.chevron_left,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: Text(
+                      'Detail Product',
+                      style: subtitleStyle.copyWith(
+                          fontSize: 22, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  Obx(() => IconButton(
+                      padding: const EdgeInsets.only(top: 20),
+                      onPressed: () {
+                        wishlistController.addFavorite(productDetail.id);
+                      },
+                      iconSize: 30,
+                      icon: wishlistController.isFavorite.value
+                          ? Icon(
+                              Icons.favorite,
                               color: secondaryColor,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: Icon(
-                                  CupertinoIcons.bag_fill,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'Add to Cart',
-                                style:
-                                    subtitleStyle.copyWith(color: whiteColor),
-                              ),
-                              Text(
-                                '150',
-                                style: subtitleStyle.copyWith(
-                                    color: const Color(0xffFCA311)),
-                              )
-                            ],
+                            )
+                          : const Icon(Icons.favorite_border)))
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      productDetail.name,
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              NumberFormat.currency(
+                                      locale: 'id',
+                                      symbol: 'Rp',
+                                      decimalDigits: 2)
+                                  .format(productDetail.harga),
+                              style: subtitleStyle.copyWith(
+                                  color: primaryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Image.network(
+                            productDetail.image,
                           ),
                         )
-                      ]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text(
-                            "Sahaja Chair",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              RichText(
-                                text: const TextSpan(
-                                  children: [
-                                    TextSpan(
-                                        text: "Height : 810 cm\n",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black)),
-                                    TextSpan(
-                                        text: "Width : 420 cm\n",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black)),
-                                    TextSpan(
-                                        text: "Depth : 500 cm\n",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black)),
-                                    TextSpan(
-                                        text: "Seat height : 47,7 cm\n",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black)),
-                                    TextSpan(
-                                        text: "Weight : 3,5 kg",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.black)),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Image.asset('assets/chair.png',
-                                    height: 200, width: 230),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                      ],
                     )
                   ],
                 ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: TextSpan(children: [
+                                  const TextSpan(
+                                      text: "Product\n",
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.black)),
+                                  TextSpan(
+                                      text: productDetail.name,
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black)),
+                                ]),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                onTap: () => cartController.decreaseQuantity(),
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      color: secondaryColor,
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 3,
+                                          blurRadius: 10,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ]),
+                                  child: Icon(
+                                    CupertinoIcons.minus,
+                                    size: 15,
+                                    color: whiteColor,
+                                  ),
+                                ),
+                              ),
+                              Obx(() => Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Text(
+                                      '${cartController.quantity.value}',
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  )),
+                              GestureDetector(
+                                onTap: () => cartController.increaseQuantity(),
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      color: secondaryColor,
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 3,
+                                          blurRadius: 10,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ]),
+                                  child: Icon(
+                                    CupertinoIcons.plus,
+                                    size: 15,
+                                    color: whiteColor,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ))
+                        ],
+                      ),
+                      Divider(
+                        color: blackColor,
+                      ),
+                      const Text("Description\n",
+                          style: TextStyle(fontSize: 14)),
+                      Text(
+                        productDetail.deskripsi,
+                        style: const TextStyle(fontSize: 14),
+                        maxLines: 10,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ]),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () => cartController.addToCart(productDetail.id),
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      color: secondaryColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Text(
+                      'Add to Cart',
+                      style: subtitleStyle.copyWith(color: whiteColor),
+                    ),
+                  ),
+                ),
               )
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

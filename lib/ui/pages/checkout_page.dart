@@ -91,21 +91,15 @@ class CheckoutPage extends StatelessWidget {
                     'Total Payment',
                     style: subtitleStyle.copyWith(fontWeight: FontWeight.w700),
                   ),
-                  Obx(() => cartController.cartData!.data.isEmpty
-                      ? Text('0',
-                          style: subtitleStyle.copyWith(
-                              color: primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700))
-                      : Text(
-                          NumberFormat.currency(
-                                  locale: 'id', symbol: 'Rp', decimalDigits: 2)
-                              .format(cartController.total.value),
-                          style: subtitleStyle.copyWith(
-                              color: primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700),
-                        )),
+                  Obx(() => Text(
+                        NumberFormat.currency(
+                                locale: 'id', symbol: 'Rp', decimalDigits: 2)
+                            .format(cartController.total.value),
+                        style: subtitleStyle.copyWith(
+                            color: primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700),
+                      )),
                 ],
               ),
             ),

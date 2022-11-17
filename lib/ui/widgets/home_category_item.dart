@@ -57,7 +57,10 @@ class HomeCategoryItem extends StatelessWidget {
               ),
             ),
           ),
-          Image.asset(imageUrl, height: 148,)
+          Image.network(
+            imageUrl,
+            height: 148,
+          )
         ],
       ),
     );

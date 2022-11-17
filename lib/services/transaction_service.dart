@@ -23,7 +23,7 @@ class TransactionService {
     if (response.statusCode == 200) {
       return 'Success';
     } else {
-      throw Exception('Gagal membuat order');
+      return 'Gagal';
     }
   }
 }

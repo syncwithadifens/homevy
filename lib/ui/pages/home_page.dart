@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/product_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/cart_page.dart';
+import 'package:homevy/ui/pages/detail_page.dart';
 import 'package:homevy/ui/pages/profile_page.dart';
 import 'package:homevy/ui/pages/wishlist_page.dart';
 import 'package:homevy/ui/widgets/home_category_item.dart';
@@ -55,128 +56,127 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      top: 20,
-                      left: 24,
-                      right: 24,
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: whiteColor,
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.search,
-                          size: 17.5,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          'Try “Sofa”, “Chair”, “Table”',
-                          style: greyTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: bold,
+      body: RefreshIndicator(
+        onRefresh: () => productController.getProduct(),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        top: 20,
+                        left: 20,
+                        right: 20,
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        color: whiteColor,
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.search,
+                            size: 17.5,
                           ),
-                        ),
-                      ],
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            'Try “Sofa”, “Chair”, “Table”',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 14,
+                              fontWeight: bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 18,
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 24,
-                right: 24,
+                ],
               ),
-              child: Text(
-                'Category',
-                style: blackTextStyle.copyWith(
-                  fontSize: 23,
-                  fontWeight: bold,
+              Padding(
+                padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+                child: Text(
+                  'Popular',
+                  style: blackTextStyle.copyWith(
+                    fontSize: 23,
+                    fontWeight: bold,
+                  ),
                 ),
               ),
-            ),
-            CarouselSlider(
-              items: const [
-                HomeCategoryItem(
-                  title: 'Chair',
-                  subtitle: 'Sahaja, Kiya Dinning...',
-                  imageUrl: 'assets/chair.png',
+              Obx(() => productController.isLoading.value
+                  ? const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : CarouselSlider(
+                      items: [
+                        for (var i = 0;
+                            i <
+                                productController
+                                    .productData!.data.products.length;
+                            i++)
+                          HomeCategoryItem(
+                            title: productController
+                                .productData!.data.products[i].name,
+                            subtitle: 'Sahaja, Kiya Dinning...',
+                            imageUrl: productController
+                                .productData!.data.products[i].image,
+                          ),
+                      ],
+                      options: CarouselOptions(
+                          height: 150,
+                          autoPlay: true,
+                          enableInfiniteScroll: false,
+                          viewportFraction: 1,
+                          autoPlayInterval: const Duration(seconds: 6)),
+                    )),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  right: 20,
                 ),
-                HomeCategoryItem(
-                  title: 'Table',
-                  subtitle: 'Sahaja, Kiya Dinning...',
-                  imageUrl: 'assets/table.png',
+                child: Text(
+                  'Product For You',
+                  style: blackTextStyle.copyWith(
+                    fontSize: 22,
+                    fontWeight: bold,
+                  ),
                 ),
-                HomeCategoryItem(
-                  title: 'Chair',
-                  subtitle: 'Sahaja, Kiya Dinning...',
-                  imageUrl: 'assets/chair.png',
-                ),
-                HomeCategoryItem(
-                  title: 'Table',
-                  subtitle: 'Sahaja, Kiya Dinning...',
-                  imageUrl: 'assets/table.png',
-                ),
-              ],
-              options: CarouselOptions(
-                height: 148,
-                enableInfiniteScroll: false,
-                viewportFraction: 1,
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                top: 20,
-                left: 24,
-                right: 24,
-              ),
-              child: Text(
-                'Product For You',
-                style: blackTextStyle.copyWith(
-                  fontSize: 22,
-                  fontWeight: bold,
-                ),
-              ),
-            ),
-            Obx(() => productController.isLoading.value
-                ? const Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-                : Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: GridView.builder(
-                        itemCount:
-                            productController.productData!.data.products.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20,
-                                mainAxisExtent: 200),
-                        itemBuilder: (context, index) {
-                          return Stack(
-                            children: [
-                              Container(
+              Obx(() => productController.isLoading.value
+                  ? const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : Expanded(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 10, left: 20, right: 20),
+                        child: GridView.builder(
+                          itemCount: productController
+                              .productData!.data.products.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 20,
+                                  mainAxisSpacing: 20,
+                                  mainAxisExtent: 200),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () => Get.to(() => DetailPage(
+                                    productDetail: productController
+                                        .productData!.data.products[index],
+                                  )),
+                              child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: whiteColor,
@@ -255,13 +255,13 @@ class HomePage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ],
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  )),
-          ],
+                    )),
+            ],
+          ),
         ),
       ),
     );

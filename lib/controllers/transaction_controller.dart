@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/models/transaction_model.dart';
 import 'package:homevy/services/transaction_service.dart';
+import 'package:homevy/ui/pages/home_page.dart';
 
 class TransactionController extends GetxController {
   TransactionService transactionService = TransactionService();
@@ -30,6 +31,15 @@ class TransactionController extends GetxController {
             snackPosition: SnackPosition.BOTTOM,
             margin: const EdgeInsets.only(bottom: 5),
             backgroundColor: Colors.green);
+      } else {
+        Get.snackbar('Error', 'Cart item is empty',
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.only(bottom: 5),
+            backgroundColor: Colors.red);
+        Future.delayed(
+          const Duration(seconds: 3),
+          () => Get.off(() => const HomePage()),
+        );
       }
     } else {
       Get.snackbar('Error', 'Shipping address is required',

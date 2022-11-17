@@ -15,4 +15,15 @@ class WishlistService {
       throw Exception('Gagal mendapat data');
     }
   }
+
+  Future<String> addToFavorite(String productId) async {
+    final response = await http.post(Uri.parse('$apiUrl/api/wishlist'),
+        headers: {'Authorization': 'Bearer ${AuthController.token}'},
+        body: {'product_id': productId});
+    if (response.statusCode == 200) {
+      return 'Success';
+    } else {
+      return 'Gagal';
+    }
+  }
 }
