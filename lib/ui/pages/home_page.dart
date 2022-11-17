@@ -1,11 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/cart_page.dart';
 import 'package:homevy/ui/pages/profile_page.dart';
 import 'package:homevy/ui/pages/wishlist_page.dart';
 import 'package:homevy/ui/widgets/home_category_item.dart';
-import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -154,7 +155,83 @@ class HomePage extends StatelessWidget {
                 fontWeight: bold,
               ),
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: GridView.builder(
+              itemCount: 5,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  mainAxisExtent: 250),
+              itemBuilder: (context, index) {
+                return Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: whiteColor,
+                        boxShadow: [
+                          BoxShadow(
+                              offset: const Offset(0, 5),
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              color: greyColor),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Image.asset('assets/chair.png'),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'kursi',
+                                        style: subtitleStyle.copyWith(
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child: Text(
+                                          NumberFormat.currency(
+                                                  locale: 'id',
+                                                  symbol: 'Rp',
+                                                  decimalDigits: 2)
+                                              .format(500000),
+                                          style: subtitleStyle.copyWith(
+                                              color: primaryColor,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
