@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homevy/controllers/cart_controller.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/checkout_page.dart';
 import 'package:homevy/ui/widgets/product_cart.dart';
 import 'package:get/get.dart';
 
@@ -181,36 +182,41 @@ class CartPage extends StatelessWidget {
                                           ],
                                         ),
                                         const Spacer(),
-                                        Container(
-                                          height: 40,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          width: Get.width,
-                                          decoration: BoxDecoration(
-                                              color: secondaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Proceed to checkout',
-                                                style: subtitleStyle.copyWith(
-                                                    color: whiteColor),
-                                              ),
-                                              Container(
-                                                height: 30,
-                                                width: 30,
-                                                decoration: BoxDecoration(
-                                                    color: whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: const Icon(
-                                                    Icons.chevron_right),
-                                              )
-                                            ],
+                                        GestureDetector(
+                                          onTap: () => Get.to(
+                                              () => const CheckoutPage()),
+                                          child: Container(
+                                            height: 40,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            width: Get.width,
+                                            decoration: BoxDecoration(
+                                                color: secondaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Proceed to checkout',
+                                                  style: subtitleStyle.copyWith(
+                                                      color: whiteColor),
+                                                ),
+                                                Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  decoration: BoxDecoration(
+                                                      color: whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  child: const Icon(
+                                                      Icons.chevron_right),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         )
                                       ],
