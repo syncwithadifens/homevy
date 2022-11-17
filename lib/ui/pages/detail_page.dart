@@ -38,7 +38,7 @@ class DetailPage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 270, 0, 0),
-                      height: 350,
+                      height: 300,
                       padding: const EdgeInsets.all(15),
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -48,7 +48,7 @@ class DetailPage extends StatelessWidget {
                             bottomLeft: Radius.circular(24),
                             bottomRight: Radius.circular(24)),
                       ),
-                      child: Column(children: <Widget>[
+                      child: Column(children: [
                         Row(
                           children: <Widget>[
                             Row(
@@ -225,7 +225,7 @@ class DetailPage extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Image.asset('assets/chair.png',
-                                    height: 230, width: 230),
+                                    height: 200, width: 230),
                               )
                             ],
                           )

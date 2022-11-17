@@ -28,6 +28,18 @@ class CartController extends GetxController {
           await cartService.addCartItem(productId.toString(), '$quantity');
       if (response == 'Success') {
         Get.to(() => const CartPage());
+        getCart();
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> removeFromCart(int cartId) async {
+    try {
+      final response = await cartService.removeCartItem(cartId);
+      if (response == 'Success') {
+        getCart();
       }
     } catch (e) {
       debugPrint(e.toString());

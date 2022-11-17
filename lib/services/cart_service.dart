@@ -23,7 +23,18 @@ class CartService {
     if (response.statusCode == 200) {
       return 'Success';
     } else {
-      throw Exception('Gagal mendapat data');
+      throw Exception('Gagal menambahkan data');
+    }
+  }
+
+  Future<String> removeCartItem(int cartId) async {
+    final response = await http.delete(
+        Uri.parse('$apiUrl/api/keranjang/$cartId'),
+        headers: {'Authorization': 'Bearer ${AuthController.token}'});
+    if (response.statusCode == 200) {
+      return 'Success';
+    } else {
+      throw Exception('Gagal menghapus data');
     }
   }
 }
