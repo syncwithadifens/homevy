@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/wishlist_page.dart';
 import 'package:homevy/ui/widgets/custom_profile.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -123,23 +124,26 @@ class ProfilePage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.favorite,
-                                size: 30,
-                                color: greyColor,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Text(
-                                  'Whistlist',
-                                  style: subtitleStyle.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                          child: GestureDetector(
+                            onTap: () => Get.to(() => const WishlistPage()),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.favorite,
+                                  size: 30,
+                                  color: greyColor,
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    'Wishlist',
+                                    style: subtitleStyle.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         Padding(

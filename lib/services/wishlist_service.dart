@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/models/wishlist_model.dart';
 import 'package:homevy/services/auth_service.dart';
@@ -16,10 +18,21 @@ class WishlistService {
     }
   }
 
-  Future<String> addToFavorite(String productId) async {
+  Future<CreateWishlistModel> addToFavorite(String productId) async {
     final response = await http.post(Uri.parse('$apiUrl/api/wishlist'),
         headers: {'Authorization': 'Bearer ${AuthController.token}'},
         body: {'product_id': productId});
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return CreateWishlistModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Gagal mendapat data');
+    }
+  }
+
+  Future<String> removeFromFavorite(String wishlistId) async {
+    final response = await http.delete(
+        Uri.parse('$apiUrl/api/wishlist/$wishlistId'),
+        headers: {'Authorization': 'Bearer ${AuthController.token}'});
     if (response.statusCode == 200) {
       return 'Success';
     } else {

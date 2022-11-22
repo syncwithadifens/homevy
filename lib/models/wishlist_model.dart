@@ -124,3 +124,55 @@ class Product {
         "deleted_at": deletedAt,
       };
 }
+
+class CreateWishlistModel {
+  String? code;
+  String? info;
+  Data? data;
+
+  CreateWishlistModel({this.code, this.info, this.data});
+
+  CreateWishlistModel.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    info = json['info'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    data['info'] = info;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
+}
+
+class Data {
+  String? productId;
+  int? userId;
+  String? updatedAt;
+  String? createdAt;
+  int? id;
+
+  Data({this.productId, this.userId, this.updatedAt, this.createdAt, this.id});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    productId = json['product_id'];
+    userId = json['user_id'];
+    updatedAt = json['updated_at'];
+    createdAt = json['created_at'];
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['product_id'] = productId;
+    data['user_id'] = userId;
+    data['updated_at'] = updatedAt;
+    data['created_at'] = createdAt;
+    data['id'] = id;
+    return data;
+  }
+}

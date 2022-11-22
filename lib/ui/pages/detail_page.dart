@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/controllers/cart_controller.dart';
 import 'package:homevy/controllers/wishlist_controller.dart';
-import 'package:homevy/models/product_model.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key, required this.productDetail});
-  final Product productDetail;
+  final dynamic productDetail;
   @override
   Widget build(BuildContext context) {
     final wishlistController = Get.put(WishlistController());
@@ -59,10 +58,11 @@ class DetailPage extends StatelessWidget {
                   Obx(() => IconButton(
                       padding: const EdgeInsets.only(top: 20),
                       onPressed: () {
-                        wishlistController.addFavorite(productDetail.id);
+                        wishlistController.toggleFavorite(productDetail.id);
                       },
                       iconSize: 30,
-                      icon: wishlistController.isFavorite.value
+                      icon: wishlistController.favoriteItem
+                              .containsKey(productDetail.id)
                           ? Icon(
                               Icons.favorite,
                               color: secondaryColor,

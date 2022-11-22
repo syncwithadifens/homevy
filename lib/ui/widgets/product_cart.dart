@@ -65,170 +65,151 @@ class ProductCart extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () => Get.defaultDialog(
+                                title: 'Quantity',
                                 cancel: GestureDetector(
                                     onTap: () => Get.back(),
                                     child: const Icon(Icons.cancel)),
                                 content: Container(
-                                  width: Get.width,
-                                  height: 200,
+                                  height: 160,
+                                  width: 200,
                                   decoration: BoxDecoration(
                                       color: whiteColor,
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(15),
                                           topRight: Radius.circular(15))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 10, 20, 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Order Information',
-                                          style: subtitleStyle.copyWith(
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 3),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width: 100,
+                                            height: 100,
+                                            padding: const EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      offset:
+                                                          const Offset(0, 5),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 3,
+                                                      color: greyColor)
+                                                ],
+                                                color: whiteColor),
+                                            child: Image.network(
+                                                cardList.product.image),
+                                          ),
+                                          Obx(() => Container(
+                                                width: 80,
+                                                height: 35,
+                                                decoration: BoxDecoration(
+                                                    color: secondaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Container(
+                                                      height: 20,
+                                                      width: 20,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: whiteColor),
+                                                      child: IconButton(
+                                                        iconSize: 20,
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        onPressed: () {
+                                                          cartController
+                                                              .decreaseQuantity();
+                                                        },
+                                                        icon: const Icon(
+                                                            Icons.remove),
+                                                        color: blackColor,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '${cartController.quantity.value}',
+                                                      style: subtitleStyle
+                                                          .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: whiteColor,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height: 20,
+                                                      width: 20,
+                                                      decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color: whiteColor),
+                                                      child: IconButton(
+                                                        iconSize: 20,
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        onPressed: () {
+                                                          cartController
+                                                              .increaseQuantity();
+                                                        },
+                                                        icon: const Icon(
+                                                            Icons.add),
+                                                        color: blackColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      GestureDetector(
+                                        onTap: () => cartController
+                                            .addToCart(cardList.productId)
+                                            .then((value) => Get.back()),
+                                        child: Container(
+                                          height: 40,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          width: Get.width,
+                                          decoration: BoxDecoration(
+                                              color: secondaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
+                                              Text(
+                                                'Change',
+                                                style: subtitleStyle.copyWith(
+                                                    color: whiteColor),
+                                              ),
                                               Container(
-                                                width: 100,
-                                                height: 100,
-                                                padding:
-                                                    const EdgeInsets.all(8),
+                                                height: 30,
+                                                width: 30,
                                                 decoration: BoxDecoration(
+                                                    color: whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            10),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          offset: const Offset(
-                                                              0, 5),
-                                                          spreadRadius: 1,
-                                                          blurRadius: 3,
-                                                          color: greyColor)
-                                                    ],
-                                                    color: whiteColor),
-                                                child: Image.network(
-                                                    cardList.product.image),
-                                              ),
-                                              Obx(() => Container(
-                                                    width: 80,
-                                                    height: 35,
-                                                    decoration: BoxDecoration(
-                                                        color: secondaryColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        Container(
-                                                          height: 20,
-                                                          width: 20,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  color:
-                                                                      whiteColor),
-                                                          child: IconButton(
-                                                            iconSize: 20,
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                            onPressed: () {
-                                                              cartController
-                                                                  .decreaseQuantity();
-                                                            },
-                                                            icon: const Icon(
-                                                                Icons.remove),
-                                                            color: blackColor,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          '${cartController.quantity.value}',
-                                                          style: subtitleStyle
-                                                              .copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: whiteColor,
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 20,
-                                                          width: 20,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  color:
-                                                                      whiteColor),
-                                                          child: IconButton(
-                                                            iconSize: 20,
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                            onPressed: () {
-                                                              cartController
-                                                                  .increaseQuantity();
-                                                            },
-                                                            icon: const Icon(
-                                                                Icons.add),
-                                                            color: blackColor,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )),
+                                                            10)),
+                                                child: const Icon(
+                                                    Icons.chevron_right),
+                                              )
                                             ],
                                           ),
                                         ),
-                                        const Spacer(),
-                                        GestureDetector(
-                                          onTap: () => cartController
-                                              .addToCart(cardList.productId)
-                                              .then((value) => Get.back()),
-                                          child: Container(
-                                            height: 40,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            width: Get.width,
-                                            decoration: BoxDecoration(
-                                                color: secondaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'Save',
-                                                  style: subtitleStyle.copyWith(
-                                                      color: whiteColor),
-                                                ),
-                                                Container(
-                                                  height: 30,
-                                                  width: 30,
-                                                  decoration: BoxDecoration(
-                                                      color: whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  child: const Icon(
-                                                      Icons.chevron_right),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
+                                    ],
                                   ),
                                 )),
                             child: const Icon(Icons.edit_note_rounded)),

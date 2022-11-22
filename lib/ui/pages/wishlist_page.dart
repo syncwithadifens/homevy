@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/cart_controller.dart';
 import 'package:homevy/controllers/wishlist_controller.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/detail_page.dart';
 import 'package:intl/intl.dart';
 
 class WishlistPage extends StatelessWidget {
@@ -63,7 +64,7 @@ class WishlistPage extends StatelessWidget {
                         child: Center(
                         child: CircularProgressIndicator(),
                       ))
-                    : wishlistController.favoriteList!.data.isEmpty
+                    : wishlistController.favoriteItem.isEmpty
                         ? const Expanded(
                             child: Center(
                             child: Text('No favorite item'),
@@ -83,90 +84,100 @@ class WishlistPage extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return Stack(
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: whiteColor,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  offset: const Offset(0, 5),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 3,
-                                                  color: greyColor)
-                                            ]),
-                                        child: Column(
-                                          children: [
-                                            Expanded(
-                                              flex: 3,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(20),
-                                                child: Image.network(
-                                                    wishlistController
-                                                        .favoriteList!
-                                                        .data[index]
-                                                        .product
-                                                        .image),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          wishlistController
-                                                              .favoriteList!
-                                                              .data[index]
-                                                              .product
-                                                              .name,
-                                                          style: subtitleStyle
-                                                              .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(top: 5),
-                                                          child: Text(
-                                                              NumberFormat.currency(
-                                                                      locale:
-                                                                          'id',
-                                                                      symbol:
-                                                                          'Rp',
-                                                                      decimalDigits:
-                                                                          2)
-                                                                  .format(wishlistController
-                                                                      .favoriteList!
-                                                                      .data[
-                                                                          index]
-                                                                      .product
-                                                                      .harga),
-                                                              style: subtitleStyle.copyWith(
-                                                                  color:
-                                                                      primaryColor,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700)),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                      GestureDetector(
+                                        onTap: () => Get.to(() => DetailPage(
+                                            productDetail: wishlistController
+                                                .favoriteList!
+                                                .data[index]
+                                                .product)),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: whiteColor,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    offset: const Offset(0, 5),
+                                                    spreadRadius: 1,
+                                                    blurRadius: 3,
+                                                    color: greyColor)
+                                              ]),
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                flex: 3,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Image.network(
+                                                      wishlistController
+                                                          .favoriteList!
+                                                          .data[index]
+                                                          .product
+                                                          .image),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Expanded(
+                                                flex: 1,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: Row(
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            wishlistController
+                                                                .favoriteList!
+                                                                .data[index]
+                                                                .product
+                                                                .name,
+                                                            style: subtitleStyle
+                                                                .copyWith(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 5),
+                                                            child: Text(
+                                                                NumberFormat.currency(
+                                                                        locale:
+                                                                            'id',
+                                                                        symbol:
+                                                                            'Rp',
+                                                                        decimalDigits:
+                                                                            2)
+                                                                    .format(wishlistController
+                                                                        .favoriteList!
+                                                                        .data[
+                                                                            index]
+                                                                        .product
+                                                                        .harga),
+                                                                style: subtitleStyle.copyWith(
+                                                                    color:
+                                                                        primaryColor,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700)),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Positioned(

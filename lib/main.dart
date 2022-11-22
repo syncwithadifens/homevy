@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/splash_page.dart';
 
 void main() async {
@@ -13,9 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      theme: ThemeData(primaryColor: secondaryColor),
+      home: const SplashPage(),
     );
   }
 }
