@@ -124,26 +124,13 @@ class DetailPage extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        RichText(
-                                          text: TextSpan(children: [
-                                            const TextSpan(
-                                                text: "Product\n",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black)),
-                                            TextSpan(
-                                                text: productDetail.name,
-                                                style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black)),
-                                          ]),
-                                        ),
-                                      ],
+                                    SizedBox(
+                                      width: 200,
+                                      child: Text(productDetail.name,
+                                          style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black)),
                                     ),
                                     Row(
                                       children: [

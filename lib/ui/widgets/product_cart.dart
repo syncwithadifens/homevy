@@ -24,7 +24,7 @@ class ProductCart extends StatelessWidget {
               Container(
                 height: 90,
                 width: 90,
-                margin: const EdgeInsets.symmetric(horizontal: 8),
+                margin: const EdgeInsets.only(right: 8),
                 decoration: BoxDecoration(
                     color: bgColor,
                     borderRadius: BorderRadius.circular(10),
@@ -40,7 +40,9 @@ class ProductCart extends StatelessWidget {
                     Text(
                       cardList.product.name,
                       style: subtitleStyle.copyWith(
-                          fontSize: 22, fontWeight: FontWeight.w700),
+                          fontSize: 18, fontWeight: FontWeight.w700),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20),

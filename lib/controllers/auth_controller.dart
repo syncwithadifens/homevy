@@ -24,14 +24,11 @@ class AuthController extends GetxController {
   Future<void> login() async {
     isLoading.value = true;
 
-    // NOTE: Menjalankan service signInWithEmail
     final userCredential =
         await authService.signInWithEmail(emailCtrl.text, passwordCtrl.text);
     message = userCredential.info;
 
-    // NOTE: Cek apakah login success
     if (message == 'Login Berhasil') {
-      // NOTE: Menyimpan data user ke Get Storage setelah di encode
       GetStorage box = GetStorage();
       String storeUserData = json.encode(userCredential);
       box.write("userData", storeUserData);

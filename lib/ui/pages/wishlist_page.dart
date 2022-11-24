@@ -102,32 +102,39 @@ class WishlistPage extends StatelessWidget {
                                           ]),
                                       child: Column(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(20),
-                                            child: Image.network(
-                                                wishlistController.favoriteList!
-                                                    .data[index].product.image),
+                                          Image.network(
+                                            wishlistController.favoriteList!
+                                                .data[index].product.image,
+                                            fit: BoxFit.cover,
+                                            height: 130,
                                           ),
+                                          const Spacer(),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
                                             child: Row(
                                               children: [
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      wishlistController
-                                                          .favoriteList!
-                                                          .data[index]
-                                                          .product
-                                                          .name,
-                                                      style: subtitleStyle
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                    SizedBox(
+                                                      width: 130,
+                                                      child: Text(
+                                                        wishlistController
+                                                            .favoriteList!
+                                                            .data[index]
+                                                            .product
+                                                            .name,
+                                                        style: subtitleStyle
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700),
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
                                                     ),
                                                     Padding(
                                                       padding:
@@ -241,17 +248,21 @@ class WishlistPage extends StatelessWidget {
                                                                             .product
                                                                             .image),
                                                                       ),
-                                                                      Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                              wishlistController.favoriteList!.data[index].product.name,
-                                                                              style: subtitleStyle.copyWith(fontWeight: FontWeight.w700)),
-                                                                          Text(
-                                                                              NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 2).format(wishlistController.favoriteList!.data[index].product.harga),
-                                                                              style: subtitleStyle.copyWith(color: primaryColor, fontSize: 14, fontWeight: FontWeight.w700)),
-                                                                        ],
+                                                                      Expanded(
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.only(left: 15),
+                                                                          child:
+                                                                              Column(
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Text(wishlistController.favoriteList!.data[index].product.name, style: subtitleStyle.copyWith(fontWeight: FontWeight.w700)),
+                                                                              Text(NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 2).format(wishlistController.favoriteList!.data[index].product.harga), style: subtitleStyle.copyWith(color: primaryColor, fontSize: 14, fontWeight: FontWeight.w700)),
+                                                                            ],
+                                                                          ),
+                                                                        ),
                                                                       ),
                                                                       Obx(() =>
                                                                           Container(

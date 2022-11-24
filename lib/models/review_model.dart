@@ -132,3 +132,105 @@ class User {
         "role": role,
       };
 }
+
+// To parse this JSON data, do
+//
+//     final createReviewModel = createReviewModelFromJson(jsonString);
+
+CreateReviewModel createReviewModelFromJson(String str) =>
+    CreateReviewModel.fromJson(json.decode(str));
+
+String createReviewModelToJson(CreateReviewModel data) =>
+    json.encode(data.toJson());
+
+class CreateReviewModel {
+  CreateReviewModel({
+    required this.code,
+    required this.info,
+    required this.data,
+  });
+
+  String code;
+  String info;
+  Data data;
+
+  factory CreateReviewModel.fromJson(Map<String, dynamic> json) =>
+      CreateReviewModel(
+        code: json["code"],
+        info: json["info"],
+        data: Data.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "info": info,
+        "data": data.toJson(),
+      };
+}
+
+class Data {
+  Data({
+    required this.userId,
+    required this.productId,
+    required this.star,
+    required this.review,
+    required this.image,
+    required this.imagePath,
+    required this.updatedAt,
+    required this.createdAt,
+    required this.id,
+  });
+
+  int userId;
+  int productId;
+  String star;
+  String review;
+  String image;
+  String imagePath;
+  DateTime updatedAt;
+  DateTime createdAt;
+  int id;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        userId: json["user_id"],
+        productId: json["product_id"],
+        star: json["star"],
+        review: json["review"],
+        image: json["image"],
+        imagePath: json["image_path"],
+        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "user_id": userId,
+        "product_id": productId,
+        "star": star,
+        "review": review,
+        "image": image,
+        "image_path": imagePath,
+        "updated_at": updatedAt.toIso8601String(),
+        "created_at": createdAt.toIso8601String(),
+        "id": id,
+      };
+}
+
+class ErrorReviewModel {
+  String code;
+  String info;
+  List? data;
+
+  ErrorReviewModel({required this.code, required this.info, this.data});
+
+  factory ErrorReviewModel.fromJson(Map<String, dynamic> json) {
+    return ErrorReviewModel(code: json['code'], info: json['info']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    data['info'] = info;
+    return data;
+  }
+}

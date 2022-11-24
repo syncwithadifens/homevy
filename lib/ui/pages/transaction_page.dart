@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/transaction_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/home_page.dart';
+import 'package:homevy/ui/pages/transaction_detail_page.dart';
 import 'package:intl/intl.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -218,24 +219,33 @@ class TransactionPage extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10,
-                                                  right: 10,
-                                                  top: 5,
-                                                  bottom: 5),
-                                              decoration: BoxDecoration(
-                                                  color: secondaryColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Text(
-                                                'Details',
-                                                style: subtitleStyle.copyWith(
-                                                    fontSize: 14,
-                                                    color: whiteColor,
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                            GestureDetector(
+                                              onTap: () => Get.to(
+                                                  () => TransactionDetailPage(
+                                                        transactionData:
+                                                            transactionController
+                                                                .transactionList!
+                                                                .data![index],
+                                                      )),
+                                              child: Container(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10,
+                                                    right: 10,
+                                                    top: 5,
+                                                    bottom: 5),
+                                                decoration: BoxDecoration(
+                                                    color: secondaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Text(
+                                                  'Details',
+                                                  style: subtitleStyle.copyWith(
+                                                      fontSize: 14,
+                                                      color: whiteColor,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
                                             ),
                                             Text(
