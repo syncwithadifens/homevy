@@ -122,12 +122,19 @@ class HomePage extends StatelessWidget {
                                 productController
                                     .productData!.data.products.length;
                             i++)
-                          HomeCategoryItem(
-                            title: productController
-                                .productData!.data.products[i].name,
-                            subtitle: 'Sahaja, Kiya Dinning...',
-                            imageUrl: productController
-                                .productData!.data.products[i].image,
+                          GestureDetector(
+                            onTap: () => Get.to(() => DetailPage(
+                                  productDetail: productController
+                                      .productData!.data.products[i],
+                                )),
+                            child: HomeCategoryItem(
+                              title: productController
+                                  .productData!.data.products[i].name,
+                              subtitle:
+                                  'Stock: ${productController.productData!.data.products[i].stock}',
+                              imageUrl: productController
+                                  .productData!.data.products[i].image,
+                            ),
                           ),
                       ],
                       options: CarouselOptions(

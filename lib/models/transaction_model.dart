@@ -19,7 +19,7 @@ class TransactionModel {
 
   String code;
   String info;
-  List<Datum> data;
+  List<Datum>? data;
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       TransactionModel(
@@ -28,11 +28,15 @@ class TransactionModel {
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
-        "code": code,
-        "info": info,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['code'] = code;
+    data['info'] = info;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
 class Datum {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:homevy/models/transaction_model.dart';
 import 'package:homevy/services/transaction_service.dart';
 import 'package:homevy/ui/pages/home_page.dart';
+import 'package:homevy/ui/pages/transaction_page.dart';
 
 class TransactionController extends GetxController {
   TransactionService transactionService = TransactionService();
@@ -14,7 +15,7 @@ class TransactionController extends GetxController {
     try {
       isLoading.value = true;
       transactionList = await transactionService.getAllTransaction();
-      if (transactionList!.info == 'Membuat Keranjang berhasil') {
+      if (transactionList!.info == 'Mengambil list transaksi berhasil') {
         isLoading.value = false;
       }
     } catch (e) {
@@ -31,6 +32,10 @@ class TransactionController extends GetxController {
             snackPosition: SnackPosition.BOTTOM,
             margin: const EdgeInsets.only(bottom: 5),
             backgroundColor: Colors.green);
+        Future.delayed(
+          const Duration(seconds: 3),
+          () => Get.off(() => const TransactionPage()),
+        );
       } else {
         Get.snackbar('Error', 'Cart item is empty',
             snackPosition: SnackPosition.BOTTOM,

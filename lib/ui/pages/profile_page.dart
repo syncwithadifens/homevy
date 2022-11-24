@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/transaction_page.dart';
 import 'package:homevy/ui/pages/wishlist_page.dart';
 import 'package:homevy/ui/widgets/custom_profile.dart';
 
@@ -148,23 +149,26 @@ class ProfilePage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.history,
-                                size: 30,
-                                color: greyColor,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15),
-                                child: Text(
-                                  'Order History',
-                                  style: subtitleStyle.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                          child: GestureDetector(
+                            onTap: () => Get.to(() => const TransactionPage()),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.history,
+                                  size: 30,
+                                  color: greyColor,
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    'My Order',
+                                    style: subtitleStyle.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         Padding(
