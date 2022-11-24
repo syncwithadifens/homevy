@@ -189,7 +189,7 @@ class HomePage extends StatelessWidget {
                                   color: whiteColor,
                                   boxShadow: [
                                     BoxShadow(
-                                        offset: const Offset(0, 5),
+                                        offset: const Offset(0, 6),
                                         spreadRadius: 1,
                                         blurRadius: 3,
                                         color: greyColor),
@@ -198,7 +198,6 @@ class HomePage extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Expanded(
-                                      flex: 3,
                                       child: Padding(
                                         padding: const EdgeInsets.all(20),
                                         child: Image.network(productController
@@ -208,55 +207,45 @@ class HomePage extends StatelessWidget {
                                             .image),
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  productController
-                                                      .productData!
-                                                      .data
-                                                      .products[index]
-                                                      .name,
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 5, bottom: 10, right: 5),
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                productController.productData!
+                                                    .data.products[index].name,
+                                                style: subtitleStyle.copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text(
+                                                  NumberFormat.currency(
+                                                          locale: 'id',
+                                                          symbol: 'Rp',
+                                                          decimalDigits: 2)
+                                                      .format(productController
+                                                          .productData!
+                                                          .data
+                                                          .products[index]
+                                                          .harga),
                                                   style: subtitleStyle.copyWith(
+                                                      color: primaryColor,
+                                                      fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w700),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5),
-                                                  child: Text(
-                                                    NumberFormat.currency(
-                                                            locale: 'id',
-                                                            symbol: 'Rp',
-                                                            decimalDigits: 2)
-                                                        .format(
-                                                            productController
-                                                                .productData!
-                                                                .data
-                                                                .products[index]
-                                                                .harga),
-                                                    style:
-                                                        subtitleStyle.copyWith(
-                                                            color: primaryColor,
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w700),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
