@@ -131,9 +131,15 @@ class TransactionPage extends StatelessWidget {
                                 margin: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
                                 decoration: BoxDecoration(
-                                  color: whiteColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: greyColor,
+                                          offset: const Offset(0, 5),
+                                          blurRadius: 10,
+                                          spreadRadius: 1)
+                                    ]),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(

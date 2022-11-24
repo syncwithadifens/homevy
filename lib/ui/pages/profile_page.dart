@@ -32,8 +32,8 @@ class ProfilePage extends StatelessWidget {
                             BoxShadow(
                                 offset: const Offset(0, 5),
                                 spreadRadius: 1,
-                                blurRadius: 3,
-                                color: blackColor)
+                                blurRadius: 10,
+                                color: greyColor)
                           ]),
                       child: IconButton(
                           padding: EdgeInsets.zero,
