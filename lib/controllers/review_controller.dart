@@ -34,7 +34,19 @@ class ReviewController extends GetxController {
       final response = await reviewService.addUserReview(
           currentProductId, '${star.value}', reviewCtrl.text, file);
       if (response == 'Review berhasil di input') {
-        Get.to(() => const HomePage());
+        Get.snackbar('Thanks for your rate', response,
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.only(bottom: 5),
+            backgroundColor: Colors.green);
+        Future.delayed(
+          const Duration(seconds: 2),
+          () => Get.to(() => const HomePage()),
+        );
+      } else if (response == 'notfound') {
+        Get.snackbar('Hmmm', 'Item not found anymore',
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.only(bottom: 5),
+            backgroundColor: Colors.red);
       } else {
         Get.snackbar('Hmmm', response,
             snackPosition: SnackPosition.BOTTOM,

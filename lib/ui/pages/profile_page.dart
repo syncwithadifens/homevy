@@ -154,7 +154,7 @@ class ProfilePage extends StatelessWidget {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.history,
+                                  Icons.shopping_bag,
                                   size: 30,
                                   color: greyColor,
                                 ),

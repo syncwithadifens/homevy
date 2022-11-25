@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:get/get.dart';
 import 'package:homevy/controllers/review_controller.dart';
-import 'package:homevy/controllers/transaction_controller.dart';
 import 'package:homevy/models/transaction_model.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +11,6 @@ class TransactionDetailPage extends StatelessWidget {
   final Datum transactionData;
   @override
   Widget build(BuildContext context) {
-    final transactionController = Get.find<TransactionController>();
     final reviewController = Get.put(ReviewController());
     return Scaffold(
       backgroundColor: bgColor,
@@ -53,7 +51,7 @@ class TransactionDetailPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 25),
                     child: Text(
-                      'My Order Detail',
+                      'Rate My Order',
                       style: subtitleStyle.copyWith(
                           fontSize: 22, fontWeight: FontWeight.w700),
                     ),
@@ -145,7 +143,7 @@ class TransactionDetailPage extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Review',
+                                                'Rate:',
                                                 style: subtitleStyle.copyWith(
                                                     fontWeight:
                                                         FontWeight.w700),
@@ -180,8 +178,8 @@ class TransactionDetailPage extends StatelessWidget {
                                                 child: TextField(
                                                   controller: reviewController
                                                       .reviewCtrl,
-                                                  keyboardType:
-                                                      TextInputType.multiline,
+                                                  textInputAction:
+                                                      TextInputAction.done,
                                                   maxLines: 10,
                                                   textAlign: TextAlign.justify,
                                                   decoration: InputDecoration(
@@ -261,8 +259,9 @@ class TransactionDetailPage extends StatelessWidget {
                                 color: secondaryColor,
                                 child: Center(
                                     child: Text(
-                                  'rate',
+                                  'Give rate',
                                   style: titleStyle,
+                                  textAlign: TextAlign.center,
                                 )),
                               ),
                             ),

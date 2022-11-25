@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/transaction_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/home_page.dart';
-import 'package:homevy/ui/pages/transaction_detail_page.dart';
+import 'package:homevy/ui/pages/rate_product_page.dart';
 import 'package:intl/intl.dart';
 
 class TransactionPage extends StatelessWidget {
@@ -54,6 +54,16 @@ class TransactionPage extends StatelessWidget {
                       style: subtitleStyle.copyWith(
                           fontSize: 22, fontWeight: FontWeight.w700),
                     ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: GestureDetector(
+                        onTap: () => transactionController.getTransaction(),
+                        child: Icon(
+                          Icons.refresh,
+                          color: secondaryColor,
+                        )),
                   )
                 ],
               ),
@@ -239,7 +249,7 @@ class TransactionPage extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             10)),
                                                 child: Text(
-                                                  'Details',
+                                                  'Rate ⭐',
                                                   style: subtitleStyle.copyWith(
                                                       fontSize: 14,
                                                       color: whiteColor,

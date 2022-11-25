@@ -255,10 +255,17 @@ class WishlistPage extends StatelessWidget {
                                                                               const EdgeInsets.only(left: 15),
                                                                           child:
                                                                               Column(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              Text(wishlistController.favoriteList!.data[index].product.name, style: subtitleStyle.copyWith(fontWeight: FontWeight.w700)),
+                                                                              Text(
+                                                                                wishlistController.favoriteList!.data[index].product.name,
+                                                                                style: subtitleStyle.copyWith(fontWeight: FontWeight.w700),
+                                                                                maxLines: 3,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                              ),
                                                                               Text(NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 2).format(wishlistController.favoriteList!.data[index].product.harga), style: subtitleStyle.copyWith(color: primaryColor, fontSize: 14, fontWeight: FontWeight.w700)),
                                                                             ],
                                                                           ),

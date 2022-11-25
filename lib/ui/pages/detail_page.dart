@@ -18,7 +18,7 @@ class DetailPage extends StatelessWidget {
     final reviewController = Get.put(ReviewController());
     reviewController.getReview(productDetail.id);
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
@@ -84,32 +84,35 @@ class DetailPage extends StatelessWidget {
                         Text(
                           productDetail.name,
                           style: const TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
+                              fontSize: 22, fontWeight: FontWeight.bold),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  NumberFormat.currency(
-                                          locale: 'id',
-                                          symbol: 'Rp',
-                                          decimalDigits: 2)
-                                      .format(productDetail.harga),
-                                  style: subtitleStyle.copyWith(
-                                      color: primaryColor,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'Rp',
+                                            decimalDigits: 2)
+                                        .format(productDetail.harga),
+                                    style: subtitleStyle.copyWith(
+                                        color: primaryColor,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Image.network(
-                                productDetail.image,
+                              Expanded(
+                                child: Image.network(
+                                  productDetail.image,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Container(
                           padding: const EdgeInsets.all(15),
@@ -248,7 +251,7 @@ class DetailPage extends StatelessWidget {
                               )
                             : reviewController.userReview!.data.isEmpty
                                 ? const Center(
-                                    child: Text('No review'),
+                                    child: Text('There is no review'),
                                   )
                                 : ListView.builder(
                                     physics:
@@ -261,7 +264,6 @@ class DetailPage extends StatelessWidget {
                                         margin: const EdgeInsets.symmetric(
                                             vertical: 8),
                                         decoration: BoxDecoration(
-                                            color: whiteColor,
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         padding: const EdgeInsets.all(10),

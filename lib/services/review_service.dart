@@ -31,9 +31,11 @@ class ReviewService {
     if (response.statusCode == 200) {
       final res = createReviewModelFromJson(response.body);
       return res.info;
-    } else {
+    } else if (response.statusCode == 400) {
       final res = ErrorReviewModel.fromJson(jsonDecode(response.body));
       return res.info;
+    } else {
+      return 'notfound';
     }
   }
 }
