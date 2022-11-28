@@ -6,8 +6,8 @@ import 'package:homevy/models/transaction_model.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:intl/intl.dart';
 
-class TransactionDetailPage extends StatelessWidget {
-  const TransactionDetailPage({super.key, required this.transactionData});
+class RateProductPage extends StatelessWidget {
+  const RateProductPage({super.key, required this.transactionData});
   final Datum transactionData;
   @override
   Widget build(BuildContext context) {

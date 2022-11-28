@@ -230,8 +230,8 @@ class TransactionPage extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             GestureDetector(
-                                              onTap: () => Get.to(
-                                                  () => TransactionDetailPage(
+                                              onTap: () =>
+                                                  Get.to(() => RateProductPage(
                                                         transactionData:
                                                             transactionController
                                                                 .transactionList!
