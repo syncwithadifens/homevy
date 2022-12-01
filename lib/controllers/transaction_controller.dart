@@ -30,13 +30,17 @@ class TransactionController extends GetxController {
       final response =
           await transactionService.createTransactionOrder(shippingAddress.text);
       if (response == 'Success') {
-        Get.snackbar('Success', 'Order success',
-            snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.only(bottom: 5),
-            backgroundColor: Colors.green,
-            duration: const Duration(seconds: 2));
+        Get.snackbar(
+          'Success',
+          'Order success',
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+          backgroundColor: Colors.green,
+          duration: const Duration(seconds: 1),
+          colorText: whiteColor,
+        );
         Future.delayed(
-            const Duration(seconds: 3),
+            const Duration(seconds: 2),
             () => Get.defaultDialog(
                 title: 'Congratulations',
                 content: Column(
@@ -72,16 +76,24 @@ class TransactionController extends GetxController {
                   ],
                 )));
       } else {
-        Get.snackbar('Error', 'Cart item is empty',
-            snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.only(bottom: 5),
-            backgroundColor: Colors.red);
+        Get.snackbar(
+          'Error',
+          'Cart is empty',
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+          backgroundColor: redColor,
+          colorText: whiteColor,
+        );
       }
     } else {
-      Get.snackbar('Error', 'Shipping address & Payment method is required',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: const EdgeInsets.only(bottom: 5),
-          backgroundColor: Colors.red);
+      Get.snackbar(
+        'Error',
+        'Shipping address & Payment method is required',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+        backgroundColor: redColor,
+        colorText: whiteColor,
+      );
     }
   }
 

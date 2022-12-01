@@ -213,8 +213,6 @@ class DetailPage extends StatelessWidget {
                                 Text(
                                   productDetail.deskripsi,
                                   style: const TextStyle(fontSize: 14),
-                                  maxLines: 10,
-                                  overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
                                 ),
                               ]),
@@ -222,7 +220,7 @@ class DetailPage extends StatelessWidget {
                         GestureDetector(
                           onTap: () => cartController
                               .addToCart(productDetail.id)
-                              .then((value) => Get.to(const CartPage())),
+                              .then((_) => Get.to(() => const CartPage())),
                           child: Container(
                             margin: const EdgeInsets.only(top: 10),
                             height: 50,
@@ -319,9 +317,8 @@ class DetailPage extends StatelessWidget {
                                                 child: Image.network(
                                                   reviewController.userReview!
                                                       .data[index].image,
-                                                  width: 100,
                                                   height: 100,
-                                                  fit: BoxFit.cover,
+                                                  fit: BoxFit.fitWidth,
                                                 ),
                                               ),
                                             )

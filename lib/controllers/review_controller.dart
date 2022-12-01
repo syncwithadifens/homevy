@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/models/review_model.dart';
 import 'package:homevy/services/review_service.dart';
+import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/home_page.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -34,30 +35,46 @@ class ReviewController extends GetxController {
       final response = await reviewService.addUserReview(
           currentProductId, '${star.value}', reviewCtrl.text, file);
       if (response == 'Review berhasil di input') {
-        Get.snackbar('Thanks for your rate', response,
-            snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.only(bottom: 5),
-            backgroundColor: Colors.green);
+        Get.snackbar(
+          'Thanks for your rate',
+          response,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+          backgroundColor: Colors.green,
+          colorText: whiteColor,
+        );
         Future.delayed(
-          const Duration(seconds: 2),
+          const Duration(seconds: 1),
           () => Get.to(() => const HomePage()),
         );
       } else if (response == 'notfound') {
-        Get.snackbar('Hmmm', 'Item not found anymore',
-            snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.only(bottom: 5),
-            backgroundColor: Colors.red);
+        Get.snackbar(
+          'Hmmm',
+          'Item not found anymore',
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+          backgroundColor: redColor,
+          colorText: whiteColor,
+        );
       } else {
-        Get.snackbar('Hmmm', response,
-            snackPosition: SnackPosition.BOTTOM,
-            margin: const EdgeInsets.only(bottom: 5),
-            backgroundColor: Colors.red);
+        Get.snackbar(
+          'Hmmm',
+          response,
+          snackPosition: SnackPosition.BOTTOM,
+          margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+          backgroundColor: redColor,
+          colorText: whiteColor,
+        );
       }
     } else {
-      Get.snackbar('Blank fields', 'Rating / Review / Photo is required',
-          snackPosition: SnackPosition.BOTTOM,
-          margin: const EdgeInsets.only(bottom: 5),
-          backgroundColor: Colors.red);
+      Get.snackbar(
+        'Blank fields',
+        'Rating / Review / Photo is required',
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+        backgroundColor: redColor,
+        colorText: whiteColor,
+      );
     }
   }
 

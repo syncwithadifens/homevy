@@ -6,8 +6,9 @@ import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/splash_page.dart';
 
 void main() async {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
+    systemNavigationBarColor: secondaryColor,
   ));
   await GetStorage.init();
   runApp(const MyApp());

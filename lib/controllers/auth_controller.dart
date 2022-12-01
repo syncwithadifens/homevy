@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:homevy/models/user_model.dart';
 import 'package:homevy/services/auth_service.dart';
+import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/home_page.dart';
 import 'package:homevy/ui/pages/login_page.dart';
 
@@ -23,11 +24,9 @@ class AuthController extends GetxController {
 
   Future<void> login() async {
     isLoading.value = true;
-
     final userCredential =
         await authService.signInWithEmail(emailCtrl.text, passwordCtrl.text);
     message = userCredential.info;
-
     if (message == 'Login Berhasil') {
       GetStorage box = GetStorage();
       String storeUserData = json.encode(userCredential);
@@ -35,30 +34,38 @@ class AuthController extends GetxController {
       userData = UserModel.fromJson(jsonDecode(box.read("userData")));
       token = userData!.data!.token;
       Future.delayed(
-        const Duration(seconds: 2),
+        const Duration(seconds: 1),
         () {
           isLoading.value = false;
-          Get.snackbar('Success', message ?? '',
-              snackPosition: SnackPosition.BOTTOM,
-              margin: const EdgeInsets.only(bottom: 5),
-              backgroundColor: Colors.green);
+          Get.snackbar(
+            'Success',
+            message ?? '',
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+            backgroundColor: Colors.green,
+            colorText: whiteColor,
+          );
         },
       );
       Future.delayed(
-        const Duration(seconds: 3),
+        const Duration(seconds: 2),
         () {
           Get.to(() => const HomePage());
         },
       );
     } else {
       Future.delayed(
-        const Duration(seconds: 3),
+        const Duration(seconds: 2),
         () {
           isLoading.value = false;
-          Get.snackbar('Error', message ?? '',
-              snackPosition: SnackPosition.BOTTOM,
-              margin: const EdgeInsets.only(bottom: 5),
-              backgroundColor: Colors.red);
+          Get.snackbar(
+            'Error',
+            message ?? '',
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+            backgroundColor: redColor,
+            colorText: whiteColor,
+          );
         },
       );
     }
@@ -76,42 +83,54 @@ class AuthController extends GetxController {
       message = userCredential.info;
       if (message == 'Register Berhasil') {
         Future.delayed(
-          const Duration(seconds: 2),
+          const Duration(seconds: 1),
           () {
             isLoading.value = false;
-            Get.snackbar('Yeeeeaaah', message ?? '',
-                snackPosition: SnackPosition.BOTTOM,
-                margin: const EdgeInsets.only(bottom: 5),
-                backgroundColor: Colors.green);
+            Get.snackbar(
+              'Yeeeeaaah',
+              message ?? '',
+              snackPosition: SnackPosition.BOTTOM,
+              margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+              backgroundColor: Colors.green,
+              colorText: whiteColor,
+            );
           },
         );
         Future.delayed(
-          const Duration(seconds: 3),
+          const Duration(seconds: 2),
           () {
             Get.to(() => const LoginPage());
           },
         );
       } else {
         Future.delayed(
-          const Duration(seconds: 3),
+          const Duration(seconds: 2),
           () {
             isLoading.value = false;
-            Get.snackbar('Oh nooooo!', message ?? '',
-                snackPosition: SnackPosition.BOTTOM,
-                margin: const EdgeInsets.only(bottom: 5),
-                backgroundColor: Colors.red);
+            Get.snackbar(
+              'Oh nooooo!',
+              message ?? '',
+              snackPosition: SnackPosition.BOTTOM,
+              margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+              backgroundColor: redColor,
+              colorText: whiteColor,
+            );
           },
         );
       }
     } else {
       Future.delayed(
-        const Duration(seconds: 3),
+        const Duration(seconds: 2),
         () {
           isLoading.value = false;
-          Get.snackbar('Oh nooooo!', 'Email address in wrong format ',
-              snackPosition: SnackPosition.BOTTOM,
-              margin: const EdgeInsets.only(bottom: 5),
-              backgroundColor: Colors.red);
+          Get.snackbar(
+            'Oh nooooo!',
+            'Email address in wrong format ',
+            snackPosition: SnackPosition.BOTTOM,
+            margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+            backgroundColor: redColor,
+            colorText: whiteColor,
+          );
         },
       );
     }

@@ -256,6 +256,7 @@ class RateProductPage extends StatelessWidget {
                                     });
                               },
                               child: Container(
+                                margin: const EdgeInsets.only(left: 8),
                                 color: secondaryColor,
                                 child: Center(
                                     child: Text(

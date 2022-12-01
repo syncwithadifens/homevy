@@ -51,7 +51,7 @@ class CartPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 25),
                     child: Text(
-                      'Shopping Cart',
+                      'Cart',
                       style: subtitleStyle.copyWith(
                           fontSize: 22, fontWeight: FontWeight.w700),
                     ),

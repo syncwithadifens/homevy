@@ -9,6 +9,7 @@ import 'package:homevy/ui/widgets/custom_bottom_navigation.dart';
 import 'package:homevy/ui/widgets/home_category_item.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -79,9 +80,16 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Obx(() => productController.isLoading.value
-                    ? const Expanded(
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Shimmer(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            height: 100,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: lightGreyColor),
+                          ),
                         ),
                       )
                     : productController.productData == null ||
@@ -145,9 +153,30 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Obx(() => productController.isLoading.value
-                    ? const Expanded(
-                        child: Center(
-                          child: CircularProgressIndicator(),
+                    ? Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10, left: 20, right: 20),
+                          child: GridView.builder(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            itemCount: 4,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 20,
+                                    mainAxisSpacing: 20,
+                                    mainAxisExtent: 200),
+                            itemBuilder: (context, index) {
+                              return Shimmer(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: lightGreyColor,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       )
                     : productController.productData == null ||

@@ -25,88 +25,66 @@ class ProfilePage extends StatelessWidget {
               FloatingActionButtonLocation.centerDocked,
           body: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: whiteColor,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: const Offset(0, 5),
-                                  spreadRadius: 1,
-                                  blurRadius: 10,
-                                  color: greyColor)
-                            ]),
-                        child: IconButton(
-                            padding: EdgeInsets.zero,
-                            iconSize: 30,
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: const Icon(
-                              Icons.chevron_left,
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 25),
-                        child: Text(
-                          'Profile',
-                          style: subtitleStyle.copyWith(
-                              color: whiteColor,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      )
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: Text(
+                      'My Account',
+                      style: subtitleStyle.copyWith(
+                          color: whiteColor,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 20),
-                  child: Stack(
-                    children: [
-                      const CustomProfile(
-                        h: 150,
-                        w: 150,
-                      ),
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: GestureDetector(
-                          onTap: () => authController.logout(),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: secondaryColor,
-                                shape: BoxShape.circle,
-                                border: Border.all(color: greyColor)),
-                            child: Icon(
-                              Icons.logout,
-                              color: whiteColor,
+                  child: Center(
+                    child: Stack(
+                      children: [
+                        const CustomProfile(
+                          h: 150,
+                          w: 150,
+                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: GestureDetector(
+                            onTap: () => authController.logout(),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: redColor,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: secondaryColor, width: 3)),
+                              child: Icon(
+                                Icons.logout,
+                                color: whiteColor,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                Text(
-                  authController.userData!.data!.user!.name ?? 'Unknown',
-                  style: subtitleStyle.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: whiteColor),
+                Center(
+                  child: Text(
+                    authController.userData!.data!.user!.name ?? 'Unknown',
+                    style: subtitleStyle.copyWith(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: whiteColor),
+                  ),
                 ),
                 Expanded(
                   child: Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 25),
                     decoration: BoxDecoration(
                         color: bgColor,
                         borderRadius: const BorderRadius.only(
@@ -187,7 +165,7 @@ class ProfilePage extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.shopping_bag,
+                                    Icons.receipt_long,
                                     size: 30,
                                     color: greyColor,
                                   ),

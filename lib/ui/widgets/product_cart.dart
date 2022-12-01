@@ -184,7 +184,7 @@ class ProductCart extends StatelessWidget {
                                         GestureDetector(
                                           onTap: () => cartController
                                               .addToCart(cardList.productId)
-                                              .then((value) => Get.back()),
+                                              .then((_) => Get.back()),
                                           child: Container(
                                             height: 40,
                                             padding: const EdgeInsets.symmetric(

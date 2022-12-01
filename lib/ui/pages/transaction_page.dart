@@ -12,6 +12,7 @@ class TransactionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CustomBottomNavigationBar.currentId = 2;
     final transactionController = Get.put(TransactionController());
     return Scaffold(
       backgroundColor: bgColor,
@@ -22,50 +23,24 @@ class TransactionPage extends StatelessWidget {
           child: DefaultTabController(
         length: 4,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: const Offset(0, 5),
-                              spreadRadius: 1,
-                              blurRadius: 3,
-                              color: greyColor)
-                        ]),
-                    child: IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: 30,
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.chevron_left,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 25),
-                    child: Text(
-                      'My Orders',
-                      style: subtitleStyle.copyWith(
-                          fontSize: 22, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(top: 25),
+                child: Text(
+                  'My Order',
+                  style: subtitleStyle.copyWith(
+                      fontSize: 22, fontWeight: FontWeight.w700),
+                ),
               ),
             ),
             Container(
               height: 30,
               margin: const EdgeInsets.only(top: 20),
               child: TabBar(
+                  padding: const EdgeInsets.only(left: 10),
                   indicatorColor: Colors.transparent,
                   isScrollable: true,
                   labelPadding: const EdgeInsets.symmetric(horizontal: 8),
@@ -111,7 +86,7 @@ class TransactionPage extends StatelessWidget {
                         width: 100,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Colors.red,
+                            color: redColor,
                             borderRadius: BorderRadius.circular(10)),
                         child: const Text("Cancelled"),
                       ),
@@ -125,17 +100,26 @@ class TransactionPage extends StatelessWidget {
                     )
                   : TabBarView(children: [
                       transactionController.transactionList!.data!.isEmpty
-                          ? Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Lottie.asset('assets/unpaid.json',
-                                      repeat: false, width: 300, height: 300),
-                                  Text(
-                                    'Transaction is empty',
-                                    style: titleStyle,
-                                  )
-                                ],
+                          ? RefreshIndicator(
+                              onRefresh: () =>
+                                  transactionController.getTransaction(),
+                              child: SingleChildScrollView(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Lottie.asset('assets/unpaid.json',
+                                          repeat: false,
+                                          width: 300,
+                                          height: 300),
+                                      Text(
+                                        'Transaction is empty',
+                                        style: titleStyle,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                             )
                           : RefreshIndicator(
@@ -146,8 +130,8 @@ class TransactionPage extends StatelessWidget {
                                     .transactionList!.data!.length,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 10),
+                                    margin: const EdgeInsets.only(
+                                        top: 15, left: 20, right: 20),
                                     decoration: BoxDecoration(
                                         color: whiteColor,
                                         borderRadius: BorderRadius.circular(10),
@@ -202,11 +186,11 @@ class TransactionPage extends StatelessWidget {
                                                       .transactionList!
                                                       .data![index]
                                                       .alamat,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
-                                              Expanded(
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
@@ -283,7 +267,7 @@ class TransactionPage extends StatelessWidget {
                                                           .capitalizeFirst ??
                                                       '',
                                                   style: subtitleStyle.copyWith(
-                                                      color: Colors.red,
+                                                      color: redColor,
                                                       fontWeight:
                                                           FontWeight.w700),
                                                 ),

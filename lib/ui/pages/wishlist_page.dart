@@ -53,7 +53,7 @@ class WishlistPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 25),
                     child: Text(
-                      'Your Wishlist',
+                      'Wishlist',
                       style: subtitleStyle.copyWith(
                           fontSize: 22, fontWeight: FontWeight.w700),
                     ),
@@ -349,7 +349,7 @@ class WishlistPage extends StatelessWidget {
                                                                           .data[
                                                                               index]
                                                                           .productId)
-                                                                      .then((value) =>
+                                                                      .then((_) =>
                                                                           Get.to(() =>
                                                                               const CartPage())),
                                                                   child:

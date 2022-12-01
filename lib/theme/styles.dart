@@ -8,7 +8,7 @@ Color blackColor = Colors.black;
 Color lightGreyColor = const Color(0xffF1F0F5);
 Color greyColor = const Color(0xffA2A6AE);
 Color bgColor = const Color(0xffF3F3F3);
-
+Color redColor = const Color.fromARGB(255, 158, 33, 24);
 
 TextStyle titleStyle = GoogleFonts.concertOne(
   fontSize: 20,
