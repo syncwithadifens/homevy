@@ -5,6 +5,7 @@ import 'package:homevy/controllers/wishlist_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/detail_page.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 class WishlistPage extends StatelessWidget {
   const WishlistPage({super.key});
@@ -51,7 +52,7 @@ class WishlistPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 25),
                     child: Text(
-                      'Your Wishlist Furniture',
+                      'Your Wishlist',
                       style: subtitleStyle.copyWith(
                           fontSize: 22, fontWeight: FontWeight.w700),
                     ),
@@ -65,9 +66,23 @@ class WishlistPage extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       ))
                     : wishlistController.favoriteItem.isEmpty
-                        ? const Expanded(
+                        ? Expanded(
                             child: Center(
-                            child: Text('No favorite item'),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Oooops!',
+                                  style: titleStyle,
+                                ),
+                                Lottie.asset('assets/empty_cart.json',
+                                    repeat: false, width: 300, height: 300),
+                                Text(
+                                  'Your wishlist is empty',
+                                  style: titleStyle,
+                                )
+                              ],
+                            ),
                           ))
                         : Expanded(
                             child: Padding(

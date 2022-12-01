@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:get/get.dart';
@@ -19,23 +20,27 @@ class SplashPage extends StatelessWidget {
           ? const HomePage()
           : const LoginPage()),
     );
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'HOMEVY',
-              style: titleStyle.copyWith(fontSize: 48),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
-                'your perfect room',
-                style: taglineStyle,
+    return AnnotatedRegion(
+      value:
+          const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'HOMEVY',
+                style: titleStyle.copyWith(fontSize: 48),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  'your perfect room',
+                  style: taglineStyle,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

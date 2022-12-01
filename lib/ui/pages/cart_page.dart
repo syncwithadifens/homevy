@@ -5,6 +5,7 @@ import 'package:homevy/ui/pages/checkout_page.dart';
 import 'package:homevy/ui/widgets/product_cart.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -66,8 +67,24 @@ class CartPage extends StatelessWidget {
                       ),
                     )
                   : cartController.cartData!.data.isEmpty
-                      ? const Expanded(
-                          child: Center(child: Text('No item in cart')))
+                      ? Expanded(
+                          child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Oooops!',
+                                style: titleStyle,
+                              ),
+                              Lottie.asset('assets/empty_cart.json',
+                                  repeat: false, width: 300, height: 300),
+                              Text(
+                                'Your cart is empty',
+                                style: titleStyle,
+                              )
+                            ],
+                          ),
+                        ))
                       : Expanded(
                           child: Stack(
                             children: [
