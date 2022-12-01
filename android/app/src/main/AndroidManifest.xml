@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.homevy">
+    package="com.syncwithadifens.homevy">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="homevy"
+        android:label="Homevy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

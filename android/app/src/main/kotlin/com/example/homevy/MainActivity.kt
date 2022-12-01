@@ -1,4 +1,4 @@
-package com.example.homevy
+package com.syncwithadifens.homevy
 
 import io.flutter.embedding.android.FlutterActivity
 
