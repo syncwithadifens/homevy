@@ -4,11 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:homevy/controllers/product_controller.dart';
 import 'package:homevy/theme/styles.dart';
-import 'package:homevy/ui/pages/cart_page.dart';
 import 'package:homevy/ui/pages/detail_page.dart';
-import 'package:homevy/ui/pages/profile_page.dart';
-import 'package:homevy/ui/pages/transaction_page.dart';
-import 'package:homevy/ui/pages/wishlist_page.dart';
+import 'package:homevy/ui/widgets/custom_bottom_navigation.dart';
 import 'package:homevy/ui/widgets/home_category_item.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -20,64 +17,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final productController = Get.put(ProductController());
     return AnnotatedRegion(
-      value:
-          const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
+      value: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+      ),
       child: Scaffold(
         backgroundColor: bgColor,
-        bottomNavigationBar: BottomAppBar(
-          color: secondaryColor,
-          notchMargin: 6,
-          elevation: 0,
-          shape: const CircularNotchedRectangle(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.home,
-                      color: whiteColor,
-                    )),
-                IconButton(
-                    onPressed: () {
-                      Get.to(() => const CartPage());
-                    },
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      color: whiteColor,
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(left: 90),
-                  child: IconButton(
-                      onPressed: () {
-                        Get.to(() => const TransactionPage());
-                      },
-                      icon: Icon(
-                        Icons.shopping_bag,
-                        color: whiteColor,
-                      )),
-                ),
-                IconButton(
-                    onPressed: () {
-                      Get.to(() => const ProfilePage());
-                    },
-                    icon: Icon(
-                      Icons.person,
-                      color: whiteColor,
-                    )),
-              ],
-            ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: primaryColor,
-          onPressed: () {
-            Get.to(() => const WishlistPage());
-          },
-          child: const Icon(Icons.favorite),
-        ),
+        bottomNavigationBar: const CustomBottomNavigationBar(),
+        floatingActionButton: const CustomFab(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: RefreshIndicator(
           onRefresh: () => productController.getProduct(),
@@ -138,18 +84,21 @@ class HomePage extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         ),
                       )
-                    : productController.productData!.data.products.isEmpty
-                        ? Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset('assets/notfound.json',
-                                    repeat: false, width: 200, height: 200),
-                                Text(
-                                  'Product not found',
-                                  style: titleStyle,
-                                )
-                              ],
+                    : productController.productData == null ||
+                            productController.productData!.data.products.isEmpty
+                        ? Expanded(
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Lottie.asset('assets/notfound.json',
+                                      repeat: false, width: 200, height: 200),
+                                  Text(
+                                    'Product not found',
+                                    style: titleStyle,
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         : CarouselSlider(
@@ -201,18 +150,21 @@ class HomePage extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         ),
                       )
-                    : productController.productData!.data.products.isEmpty
-                        ? Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset('assets/notfound.json',
-                                    repeat: false, width: 200, height: 200),
-                                Text(
-                                  'Product not found',
-                                  style: titleStyle,
-                                )
-                              ],
+                    : productController.productData == null ||
+                            productController.productData!.data.products.isEmpty
+                        ? Expanded(
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Lottie.asset('assets/notfound.json',
+                                      repeat: false, width: 200, height: 200),
+                                  Text(
+                                    'Product not found',
+                                    style: titleStyle,
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         : Expanded(
@@ -220,6 +172,7 @@ class HomePage extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   top: 10, left: 20, right: 20),
                               child: GridView.builder(
+                                padding: const EdgeInsets.only(bottom: 15),
                                 itemCount: productController
                                     .productData!.data.products.length,
                                 gridDelegate:

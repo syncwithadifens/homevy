@@ -6,6 +6,7 @@ import 'package:homevy/controllers/cart_controller.dart';
 import 'package:homevy/controllers/review_controller.dart';
 import 'package:homevy/controllers/wishlist_controller.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/cart_page.dart';
 import 'package:intl/intl.dart';
 
 class DetailPage extends StatelessWidget {
@@ -101,7 +102,7 @@ class DetailPage extends StatelessWidget {
                                         .format(productDetail.harga),
                                     style: subtitleStyle.copyWith(
                                         color: primaryColor,
-                                        fontSize: 14,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.w700),
                                   ),
                                 ),
@@ -219,8 +220,9 @@ class DetailPage extends StatelessWidget {
                               ]),
                         ),
                         GestureDetector(
-                          onTap: () =>
-                              cartController.addToCart(productDetail.id),
+                          onTap: () => cartController
+                              .addToCart(productDetail.id)
+                              .then((value) => Get.to(const CartPage())),
                           child: Container(
                             margin: const EdgeInsets.only(top: 10),
                             height: 50,

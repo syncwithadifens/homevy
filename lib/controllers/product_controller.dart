@@ -11,11 +11,13 @@ class ProductController extends GetxController {
   Future<void> getProduct() async {
     try {
       isLoading.value = true;
-      productData = await productService.getProductByCategory();
-      if (productData!.info == 'Category Berhasil Diambil') {
+      final res = await productService.getProductByCategory();
+      if (res.info == 'Category Berhasil Diambil') {
         isLoading.value = false;
+        productData = res;
       }
     } catch (e) {
+      isLoading.value = false;
       debugPrint(e.toString());
     }
   }

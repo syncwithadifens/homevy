@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/controllers/transaction_controller.dart';
 import 'package:homevy/theme/styles.dart';
-import 'package:homevy/ui/pages/home_page.dart';
 import 'package:homevy/ui/pages/rate_product_page.dart';
+import 'package:homevy/ui/widgets/custom_bottom_navigation.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,6 +15,9 @@ class TransactionPage extends StatelessWidget {
     final transactionController = Get.put(TransactionController());
     return Scaffold(
       backgroundColor: bgColor,
+      bottomNavigationBar: const CustomBottomNavigationBar(),
+      floatingActionButton: const CustomFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SafeArea(
           child: DefaultTabController(
         length: 4,
@@ -42,7 +45,7 @@ class TransactionPage extends StatelessWidget {
                         padding: EdgeInsets.zero,
                         iconSize: 30,
                         onPressed: () {
-                          Get.to(() => const HomePage());
+                          Get.back();
                         },
                         icon: const Icon(
                           Icons.chevron_left,
@@ -56,16 +59,6 @@ class TransactionPage extends StatelessWidget {
                           fontSize: 22, fontWeight: FontWeight.w700),
                     ),
                   ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 25),
-                    child: GestureDetector(
-                        onTap: () => transactionController.getTransaction(),
-                        child: Icon(
-                          Icons.refresh,
-                          color: secondaryColor,
-                        )),
-                  )
                 ],
               ),
             ),
@@ -145,157 +138,164 @@ class TransactionPage extends StatelessWidget {
                                 ],
                               ),
                             )
-                          : ListView.builder(
-                              itemCount: transactionController
-                                  .transactionList!.data!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10),
-                                  decoration: BoxDecoration(
-                                      color: whiteColor,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: greyColor,
-                                            offset: const Offset(0, 5),
-                                            blurRadius: 10,
-                                            spreadRadius: 1)
-                                      ]),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Information:',
-                                              style: subtitleStyle.copyWith(
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              DateFormat('d MMM yyyy').format(
-                                                  transactionController
-                                                      .transactionList!
-                                                      .data![index]
-                                                      .createdAt),
-                                              style:
-                                                  TextStyle(color: greyColor),
-                                            ),
-                                          ],
-                                        ),
-                                        const Padding(
-                                          padding:
-                                              EdgeInsets.symmetric(vertical: 3),
-                                          child: Text('Address:'),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                transactionController
-                                                    .transactionList!
-                                                    .data![index]
-                                                    .alamat,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Text('Total Amount:',
-                                                      style: TextStyle(
-                                                          color: greyColor)),
-                                                  Text(
-                                                    NumberFormat.currency(
-                                                            locale: 'id',
-                                                            symbol: 'Rp',
-                                                            decimalDigits: 2)
-                                                        .format(
-                                                            transactionController
-                                                                .transactionList!
-                                                                .data![index]
-                                                                .total),
-                                                    style:
-                                                        subtitleStyle.copyWith(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 3),
-                                          child: Row(
+                          : RefreshIndicator(
+                              onRefresh: () =>
+                                  transactionController.getTransaction(),
+                              child: ListView.builder(
+                                itemCount: transactionController
+                                    .transactionList!.data!.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 10),
+                                    decoration: BoxDecoration(
+                                        color: whiteColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: greyColor,
+                                              offset: const Offset(0, 5),
+                                              blurRadius: 10,
+                                              spreadRadius: 1)
+                                        ]),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              GestureDetector(
-                                                onTap: () => Get.to(
-                                                    () => RateProductPage(
-                                                          transactionData:
-                                                              transactionController
-                                                                  .transactionList!
-                                                                  .data![index],
-                                                        )),
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10,
-                                                          right: 10,
-                                                          top: 5,
-                                                          bottom: 5),
-                                                  decoration: BoxDecoration(
-                                                      color: secondaryColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  child: Text(
-                                                    'Rate ⭐',
-                                                    style:
-                                                        subtitleStyle.copyWith(
-                                                            fontSize: 14,
-                                                            color: whiteColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
-                                                  ),
-                                                ),
+                                              Text(
+                                                'Information:',
+                                                style: subtitleStyle.copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                               Text(
-                                                transactionController
+                                                DateFormat('d MMM yyyy').format(
+                                                    transactionController
                                                         .transactionList!
                                                         .data![index]
-                                                        .status
-                                                        .capitalizeFirst ??
-                                                    '',
-                                                style: subtitleStyle.copyWith(
-                                                    color: Colors.red,
-                                                    fontWeight:
-                                                        FontWeight.w700),
+                                                        .createdAt),
+                                                style:
+                                                    TextStyle(color: greyColor),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ],
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 3),
+                                            child: Text('Address:'),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  transactionController
+                                                      .transactionList!
+                                                      .data![index]
+                                                      .alamat,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Text('Total Amount:',
+                                                        style: TextStyle(
+                                                            color: greyColor)),
+                                                    Text(
+                                                      NumberFormat.currency(
+                                                              locale: 'id',
+                                                              symbol: 'Rp',
+                                                              decimalDigits: 2)
+                                                          .format(
+                                                              transactionController
+                                                                  .transactionList!
+                                                                  .data![index]
+                                                                  .total),
+                                                      style: subtitleStyle
+                                                          .copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 3),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () => Get.to(
+                                                      () => RateProductPage(
+                                                            transactionData:
+                                                                transactionController
+                                                                    .transactionList!
+                                                                    .data![index],
+                                                          )),
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10,
+                                                            top: 5,
+                                                            bottom: 5),
+                                                    decoration: BoxDecoration(
+                                                        color: secondaryColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: Text(
+                                                      'Rate ⭐',
+                                                      style: subtitleStyle
+                                                          .copyWith(
+                                                              fontSize: 14,
+                                                              color: whiteColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  transactionController
+                                                          .transactionList!
+                                                          .data![index]
+                                                          .status
+                                                          .capitalizeFirst ??
+                                                      '',
+                                                  style: subtitleStyle.copyWith(
+                                                      color: Colors.red,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                       Center(
                         child: Column(

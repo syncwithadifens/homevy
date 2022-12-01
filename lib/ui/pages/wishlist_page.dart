@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:homevy/controllers/cart_controller.dart';
 import 'package:homevy/controllers/wishlist_controller.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/cart_page.dart';
 import 'package:homevy/ui/pages/detail_page.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -88,6 +89,7 @@ class WishlistPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: GridView.builder(
+                                padding: const EdgeInsets.only(bottom: 15),
                                 itemCount: wishlistController
                                     .favoriteList!.data.length,
                                 gridDelegate:
@@ -341,11 +343,15 @@ class WishlistPage extends StatelessWidget {
                                                                 ),
                                                                 const Spacer(),
                                                                 GestureDetector(
-                                                                  onTap: () => cartController.addToCart(wishlistController
-                                                                      .favoriteList!
-                                                                      .data[
-                                                                          index]
-                                                                      .productId),
+                                                                  onTap: () => cartController
+                                                                      .addToCart(wishlistController
+                                                                          .favoriteList!
+                                                                          .data[
+                                                                              index]
+                                                                          .productId)
+                                                                      .then((value) =>
+                                                                          Get.to(() =>
+                                                                              const CartPage())),
                                                                   child:
                                                                       Container(
                                                                     height: 40,

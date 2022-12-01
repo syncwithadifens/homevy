@@ -69,7 +69,6 @@ class CheckoutPage extends StatelessWidget {
                 controller: transactionController.shippingAddress,
                 keyboardType: TextInputType.streetAddress,
                 maxLines: 4,
-                textAlign: TextAlign.justify,
                 decoration: InputDecoration(
                   hintText: 'Your address',
                   contentPadding:
@@ -105,7 +104,7 @@ class CheckoutPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-              child: Text('Payment Method',
+              child: Text('Payment Methods',
                   style: subtitleStyle.copyWith(fontWeight: FontWeight.w700)),
             ),
             Container(
@@ -117,12 +116,27 @@ class CheckoutPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Select payment method'),
-                  DropdownButton(
-                    items: const [
-                      DropdownMenuItem(child: Text('BNI')),
-                    ],
-                    onChanged: (value) {},
-                  )
+                  Obx(() => DropdownButton(
+                        hint: transactionController.paymentMethod.isEmpty
+                            ? const Text(
+                                'Choose',
+                              )
+                            : Text(transactionController.paymentMethod.value),
+                        items: [
+                          'BNI',
+                          'BRI',
+                          'BCA',
+                          'Mandiri',
+                          'Bank Jago',
+                          'Shopee Pay'
+                        ]
+                            .map((e) =>
+                                DropdownMenuItem(value: e, child: Text(e)))
+                            .toList(),
+                        onChanged: (value) {
+                          transactionController.paymentMethod.value = value!;
+                        },
+                      ))
                 ],
               ),
             ),

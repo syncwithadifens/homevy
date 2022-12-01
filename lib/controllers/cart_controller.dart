@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:homevy/models/cart_model.dart';
 import 'package:homevy/services/cart_service.dart';
 import 'package:flutter/material.dart';
-import 'package:homevy/ui/pages/cart_page.dart';
 
 class CartController extends GetxController {
   CartService cartService = CartService();
@@ -10,6 +9,7 @@ class CartController extends GetxController {
   final isLoading = false.obs;
   final quantity = 1.obs;
   final total = 0.obs;
+
   Future<void> getCart() async {
     try {
       isLoading.value = true;
@@ -36,7 +36,6 @@ class CartController extends GetxController {
       final response =
           await cartService.addCartItem(productId.toString(), '$quantity');
       if (response == 'Success') {
-        Get.to(() => const CartPage());
         getCart();
       }
     } catch (e) {

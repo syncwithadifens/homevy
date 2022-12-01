@@ -11,6 +11,7 @@ class TransactionController extends GetxController {
   TransactionModel? transactionList;
   final isLoading = false.obs;
   final shippingAddress = TextEditingController();
+  final paymentMethod = ''.obs;
 
   Future<void> getTransaction() async {
     try {
@@ -25,7 +26,7 @@ class TransactionController extends GetxController {
   }
 
   Future<void> createTransaction() async {
-    if (shippingAddress.text.isNotEmpty) {
+    if (shippingAddress.text.isNotEmpty && paymentMethod.value.isNotEmpty) {
       final response =
           await transactionService.createTransactionOrder(shippingAddress.text);
       if (response == 'Success') {
@@ -48,7 +49,7 @@ class TransactionController extends GetxController {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () => Get.off(() => const HomePage()),
+                          onTap: () => Get.to(() => const HomePage()),
                           child: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
@@ -57,8 +58,7 @@ class TransactionController extends GetxController {
                               child: const Text('Maybe later')),
                         ),
                         GestureDetector(
-                          onTap: () => Get.off(() => const TransactionPage())!
-                              .then((value) => getTransaction()),
+                          onTap: () => Get.to(() => const TransactionPage()),
                           child: Container(
                               margin: const EdgeInsets.only(left: 8),
                               padding: const EdgeInsets.all(8),
@@ -76,13 +76,9 @@ class TransactionController extends GetxController {
             snackPosition: SnackPosition.BOTTOM,
             margin: const EdgeInsets.only(bottom: 5),
             backgroundColor: Colors.red);
-        Future.delayed(
-          const Duration(seconds: 3),
-          () => Get.off(() => const HomePage()),
-        );
       }
     } else {
-      Get.snackbar('Error', 'Shipping address is required',
+      Get.snackbar('Error', 'Shipping address & Payment method is required',
           snackPosition: SnackPosition.BOTTOM,
           margin: const EdgeInsets.only(bottom: 5),
           backgroundColor: Colors.red);

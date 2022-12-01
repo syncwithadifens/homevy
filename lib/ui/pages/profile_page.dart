@@ -5,6 +5,7 @@ import 'package:homevy/controllers/auth_controller.dart';
 import 'package:homevy/theme/styles.dart';
 import 'package:homevy/ui/pages/transaction_page.dart';
 import 'package:homevy/ui/pages/wishlist_page.dart';
+import 'package:homevy/ui/widgets/custom_bottom_navigation.dart';
 import 'package:homevy/ui/widgets/custom_profile.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -18,6 +19,10 @@ class ProfilePage extends StatelessWidget {
           const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
       child: Scaffold(
           backgroundColor: secondaryColor,
+          bottomNavigationBar: const CustomBottomNavigationBar(),
+          floatingActionButton: const CustomFab(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           body: SafeArea(
             child: Column(
               children: [
@@ -62,11 +67,34 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 30, bottom: 20),
-                  child: CustomProfile(
-                    h: 150,
-                    w: 150,
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, bottom: 20),
+                  child: Stack(
+                    children: [
+                      const CustomProfile(
+                        h: 150,
+                        w: 150,
+                      ),
+                      Positioned(
+                        right: 0,
+                        bottom: 0,
+                        child: GestureDetector(
+                          onTap: () => authController.logout(),
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: secondaryColor,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: greyColor)),
+                            child: Icon(
+                              Icons.logout,
+                              color: whiteColor,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Text(
@@ -80,7 +108,7 @@ class ProfilePage extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
-                        color: whiteColor,
+                        color: bgColor,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(24),
                             topRight: Radius.circular(24))),
@@ -197,50 +225,26 @@ class ProfilePage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.credit_card,
-                                    size: 30,
-                                    color: greyColor,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15),
-                                    child: Text(
-                                      'Payment',
-                                      style: subtitleStyle.copyWith(
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              authController.logout();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 10),
-                              width: MediaQuery.of(context).size.width,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: secondaryColor),
-                              child: Center(
-                                child: Text(
-                                  'Logout',
-                                  style: subtitleStyle.copyWith(
-                                      color: whiteColor,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.credit_card,
+                                  size: 30,
+                                  color: greyColor,
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    'Payment',
+                                    style: subtitleStyle.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ],
