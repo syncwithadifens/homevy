@@ -7,7 +7,8 @@ class CartController extends GetxController {
   CartService cartService = CartService();
   CartModel? cartData;
   final isLoading = false.obs;
-  final quantity = 1.obs;
+  final existQty = {}.obs;
+  final newQty = 1.obs;
   final total = 0.obs;
 
   Future<void> getCart() async {
@@ -22,19 +23,21 @@ class CartController extends GetxController {
             final int subtotal;
             subtotal = cartData!.data[i].product.harga * cartData!.data[i].qty;
             listPrice.add(subtotal);
+            existQty[cartData!.data[i].productId] = cartData!.data[i].qty;
           }
           total.value = listPrice.reduce((value, element) => value + element);
         }
       }
+      print(existQty);
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  Future<void> addToCart(int productId) async {
+  Future<void> addToCart(int productId, String stat) async {
     try {
-      final response =
-          await cartService.addCartItem(productId.toString(), '$quantity');
+      final response = await cartService.addCartItem('$productId',
+          '${stat == 'exist' ? existQty[productId] : newQty.value}');
       if (response == 'Success') {
         getCart();
       }
@@ -55,13 +58,23 @@ class CartController extends GetxController {
     }
   }
 
-  void increaseQuantity() {
-    quantity.value++;
+  void increaseQuantity(int productId) {
+    if (existQty.containsKey(productId)) {
+      existQty[productId]++;
+      addToCart(productId, 'exist');
+    } else {
+      newQty.value++;
+    }
   }
 
-  void decreaseQuantity() {
-    if (quantity.value > 1) {
-      quantity.value--;
+  void decreaseQuantity(int productId) {
+    if (existQty.containsKey(productId)) {
+      if (existQty[productId] > 1) {
+        existQty[productId]--;
+        addToCart(productId, 'exist');
+      }
+    } else if (newQty.value > 1) {
+      newQty.value--;
     }
   }
 

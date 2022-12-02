@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homevy/theme/styles.dart';
+import 'package:homevy/ui/pages/cart_page.dart';
 import 'package:homevy/ui/pages/home_page.dart';
 import 'package:homevy/ui/pages/profile_page.dart';
 import 'package:homevy/ui/pages/transaction_page.dart';
@@ -114,7 +115,7 @@ class CustomFab extends StatelessWidget {
     return FloatingActionButton(
       backgroundColor: primaryColor,
       onPressed: () {
-        Get.to(() => const WishlistPage());
+        Get.to(() => const CartPage());
       },
       child: Icon(
         Icons.shopping_bag_outlined,

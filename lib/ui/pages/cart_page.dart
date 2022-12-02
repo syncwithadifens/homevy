@@ -104,8 +104,10 @@ class CartPage extends StatelessWidget {
                               Positioned(
                                 bottom: 0,
                                 child: Container(
+                                  height: Get.height * 0.25,
                                   width: Get.width,
-                                  height: 200,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 20, 20, 20),
                                   decoration: BoxDecoration(
                                       color: whiteColor,
                                       boxShadow: [
@@ -118,82 +120,26 @@ class CartPage extends StatelessWidget {
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(15),
                                           topRight: Radius.circular(15))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 20, 20, 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Order Information',
-                                          style: subtitleStyle.copyWith(
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Subtotal',
-                                                style: subtitleStyle.copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: greyColor),
-                                              ),
-                                              Text(
-                                                NumberFormat.currency(
-                                                        locale: 'id',
-                                                        symbol: 'Rp',
-                                                        decimalDigits: 2)
-                                                    .format(cartController
-                                                        .total.value),
-                                                style: subtitleStyle.copyWith(
-                                                    color: primaryColor,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Shipping Cost',
-                                                style: subtitleStyle.copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: greyColor),
-                                              ),
-                                              Text(
-                                                'free',
-                                                style: subtitleStyle.copyWith(
-                                                    color: primaryColor,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Divider(
-                                          color: secondaryColor,
-                                        ),
-                                        Row(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Order Information',
+                                        style: subtitleStyle.copyWith(
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              'Total Payment',
+                                              'Subtotal',
                                               style: subtitleStyle.copyWith(
-                                                  fontWeight: FontWeight.w700),
+                                                  fontWeight: FontWeight.w500,
+                                                  color: greyColor),
                                             ),
                                             Text(
                                               NumberFormat.currency(
@@ -209,46 +155,93 @@ class CartPage extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        const Spacer(),
-                                        GestureDetector(
-                                          onTap: () => Get.to(
-                                              () => const CheckoutPage()),
-                                          child: Container(
-                                            height: 40,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            width: Get.width,
-                                            decoration: BoxDecoration(
-                                                color: secondaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'Proceed to checkout',
-                                                  style: subtitleStyle.copyWith(
-                                                      color: whiteColor),
-                                                ),
-                                                Container(
-                                                  height: 30,
-                                                  width: 30,
-                                                  decoration: BoxDecoration(
-                                                      color: whiteColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  child: const Icon(
-                                                      Icons.chevron_right),
-                                                )
-                                              ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Shipping Cost',
+                                              style: subtitleStyle.copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: greyColor),
                                             ),
+                                            Text(
+                                              'free',
+                                              style: subtitleStyle.copyWith(
+                                                  color: primaryColor,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: secondaryColor,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Total Payment',
+                                            style: subtitleStyle.copyWith(
+                                                fontWeight: FontWeight.w700),
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                          Text(
+                                            NumberFormat.currency(
+                                                    locale: 'id',
+                                                    symbol: 'Rp',
+                                                    decimalDigits: 2)
+                                                .format(
+                                                    cartController.total.value),
+                                            style: subtitleStyle.copyWith(
+                                                color: primaryColor,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      GestureDetector(
+                                        onTap: () =>
+                                            Get.to(() => const CheckoutPage()),
+                                        child: Container(
+                                          height: 50,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          width: Get.width,
+                                          decoration: BoxDecoration(
+                                              color: secondaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Proceed to checkout',
+                                                style: subtitleStyle.copyWith(
+                                                    color: whiteColor),
+                                              ),
+                                              Container(
+                                                height: 30,
+                                                width: 30,
+                                                decoration: BoxDecoration(
+                                                    color: whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: const Icon(
+                                                    Icons.chevron_right),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               )

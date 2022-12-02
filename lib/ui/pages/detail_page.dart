@@ -136,73 +136,92 @@ class DetailPage extends StatelessWidget {
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black)),
                                     ),
-                                    Row(
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () =>
-                                              cartController.decreaseQuantity(),
-                                          child: Container(
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color: secondaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 3,
-                                                    blurRadius: 10,
-                                                    offset: const Offset(0, 3),
+                                    Obx(() => cartController.existQty
+                                            .containsKey(productDetail.id)
+                                        ? Text(
+                                            'added to cart',
+                                            style: subtitleStyle.copyWith(
+                                                color: redColor),
+                                          )
+                                        : Row(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  cartController
+                                                      .decreaseQuantity(
+                                                          productDetail.id);
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      color: secondaryColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 3,
+                                                          blurRadius: 10,
+                                                          offset: const Offset(
+                                                              0, 3),
+                                                        ),
+                                                      ]),
+                                                  child: Icon(
+                                                    CupertinoIcons.minus,
+                                                    size: 15,
+                                                    color: whiteColor,
                                                   ),
-                                                ]),
-                                            child: Icon(
-                                              CupertinoIcons.minus,
-                                              size: 15,
-                                              color: whiteColor,
-                                            ),
-                                          ),
-                                        ),
-                                        Obx(() => Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Text(
-                                                '${cartController.quantity.value}',
-                                                style: const TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black,
                                                 ),
                                               ),
-                                            )),
-                                        GestureDetector(
-                                          onTap: () =>
-                                              cartController.increaseQuantity(),
-                                          child: Container(
-                                            padding: const EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                color: secondaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 3,
-                                                    blurRadius: 10,
-                                                    offset: const Offset(0, 3),
+                                              Container(
+                                                  margin: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 10),
+                                                  child: Text(
+                                                    '${cartController.newQty}',
+                                                    style: const TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                    ),
+                                                  )),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  cartController
+                                                      .increaseQuantity(
+                                                          productDetail.id);
+                                                },
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  decoration: BoxDecoration(
+                                                      color: secondaryColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 3,
+                                                          blurRadius: 10,
+                                                          offset: const Offset(
+                                                              0, 3),
+                                                        ),
+                                                      ]),
+                                                  child: Icon(
+                                                    CupertinoIcons.plus,
+                                                    size: 15,
+                                                    color: whiteColor,
                                                   ),
-                                                ]),
-                                            child: Icon(
-                                              CupertinoIcons.plus,
-                                              size: 15,
-                                              color: whiteColor,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    )
+                                                ),
+                                              )
+                                            ],
+                                          ))
                                   ],
                                 ),
                                 Divider(
@@ -218,9 +237,23 @@ class DetailPage extends StatelessWidget {
                               ]),
                         ),
                         GestureDetector(
-                          onTap: () => cartController
-                              .addToCart(productDetail.id)
-                              .then((_) => Get.to(() => const CartPage())),
+                          onTap: () {
+                            cartController.existQty
+                                    .containsKey(productDetail.id)
+                                ? Get.snackbar(
+                                    'Ooops!',
+                                    'You already add this item on cart before',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    margin: const EdgeInsets.only(
+                                        bottom: 5, left: 5, right: 5),
+                                    backgroundColor: redColor,
+                                    colorText: whiteColor,
+                                  )
+                                : cartController
+                                    .addToCart(productDetail.id, 'new')
+                                    .then((value) =>
+                                        Get.to(() => const CartPage()));
+                          },
                           child: Container(
                             margin: const EdgeInsets.only(top: 10),
                             height: 50,
