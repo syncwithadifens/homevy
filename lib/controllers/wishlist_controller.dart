@@ -21,6 +21,7 @@ class WishlistController extends GetxController {
         }
       }
     } catch (e) {
+      isLoading.value = false;
       debugPrint(e.toString());
     }
   }

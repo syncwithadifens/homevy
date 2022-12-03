@@ -70,7 +70,7 @@ class DetailPage extends StatelessWidget {
                               .containsKey(productDetail.id)
                           ? Icon(
                               Icons.favorite,
-                              color: secondaryColor,
+                              color: redColor,
                             )
                           : const Icon(Icons.favorite_border)))
                 ],
@@ -139,7 +139,7 @@ class DetailPage extends StatelessWidget {
                                     Obx(() => cartController.existQty
                                             .containsKey(productDetail.id)
                                         ? Text(
-                                            'added to cart',
+                                            'In cart',
                                             style: subtitleStyle.copyWith(
                                                 color: redColor),
                                           )

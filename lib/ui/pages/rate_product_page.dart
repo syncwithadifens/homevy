@@ -168,8 +168,11 @@ class RateProductPage extends StatelessWidget {
                                                       onTap: () =>
                                                           reviewController
                                                               .selectImg(),
-                                                      child: const Icon(
-                                                          Icons.add_a_photo))
+                                                      child: Icon(
+                                                        Icons
+                                                            .add_a_photo_outlined,
+                                                        color: primaryColor,
+                                                      ))
                                                 ],
                                               ),
                                               Padding(
@@ -211,7 +214,7 @@ class RateProductPage extends StatelessWidget {
                                                 child: Container(
                                                   margin: const EdgeInsets.only(
                                                       bottom: 10),
-                                                  height: 40,
+                                                  height: 50,
                                                   padding: const EdgeInsets
                                                           .symmetric(
                                                       horizontal: 10),

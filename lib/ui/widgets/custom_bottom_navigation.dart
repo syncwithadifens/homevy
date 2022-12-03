@@ -118,8 +118,8 @@ class CustomFab extends StatelessWidget {
         Get.to(() => const CartPage());
       },
       child: Icon(
-        Icons.shopping_bag_outlined,
-        color: lightGreyColor,
+        Icons.local_mall_outlined,
+        color: secondaryColor,
       ),
     );
   }

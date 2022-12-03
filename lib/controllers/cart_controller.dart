@@ -28,8 +28,8 @@ class CartController extends GetxController {
           total.value = listPrice.reduce((value, element) => value + element);
         }
       }
-      print(existQty);
     } catch (e) {
+      isLoading.value = false;
       debugPrint(e.toString());
     }
   }

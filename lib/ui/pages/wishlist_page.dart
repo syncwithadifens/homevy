@@ -100,183 +100,191 @@ class WishlistPage extends StatelessWidget {
                                           mainAxisSpacing: 20,
                                           mainAxisExtent: 250),
                                   itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => DetailPage(
-                                          productDetail: wishlistController
-                                              .favoriteList!
-                                              .data[index]
-                                              .product)),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: whiteColor,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  offset: const Offset(0, 5),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 3,
-                                                  color: greyColor)
-                                            ]),
-                                        child: Column(
-                                          children: [
-                                            Image.network(
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: whiteColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                offset: const Offset(0, 5),
+                                                spreadRadius: 1,
+                                                blurRadius: 3,
+                                                color: greyColor)
+                                          ]),
+                                      child: Column(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () => Get.to(() =>
+                                                DetailPage(
+                                                    productDetail:
+                                                        wishlistController
+                                                            .favoriteList!
+                                                            .data[index]
+                                                            .product)),
+                                            child: Image.network(
                                               wishlistController.favoriteList!
                                                   .data[index].product.image,
                                               fit: BoxFit.cover,
                                               height: 130,
                                             ),
-                                            const Spacer(),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              child: Row(
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 130,
-                                                        child: Text(
-                                                          wishlistController
-                                                              .favoriteList!
-                                                              .data[index]
-                                                              .product
-                                                              .name,
-                                                          style: subtitleStyle
-                                                              .copyWith(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700),
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 5),
-                                                        child: Text(
-                                                            NumberFormat.currency(
-                                                                    locale:
-                                                                        'id',
-                                                                    symbol:
-                                                                        'Rp',
-                                                                    decimalDigits:
-                                                                        2)
-                                                                .format(wishlistController
-                                                                    .favoriteList!
-                                                                    .data[index]
-                                                                    .product
-                                                                    .harga),
-                                                            style: subtitleStyle.copyWith(
-                                                                color:
-                                                                    primaryColor,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700)),
-                                                      ),
-                                                    ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () => Get.to(() =>
+                                                      DetailPage(
+                                                          productDetail:
+                                                              wishlistController
+                                                                  .favoriteList!
+                                                                  .data[index]
+                                                                  .product)),
+                                                  child: Text(
+                                                    wishlistController
+                                                        .favoriteList!
+                                                        .data[index]
+                                                        .product
+                                                        .name,
+                                                    style:
+                                                        subtitleStyle.copyWith(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700),
+                                                    maxLines: 2,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                      NumberFormat.currency(
+                                                              locale: 'id',
+                                                              symbol: 'Rp',
+                                                              decimalDigits: 2)
+                                                          .format(
+                                                              wishlistController
+                                                                  .favoriteList!
+                                                                  .data[index]
+                                                                  .product
+                                                                  .harga),
+                                                      style: subtitleStyle
+                                                          .copyWith(
+                                                              color:
+                                                                  primaryColor,
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700)),
+                                                ),
+                                              ],
                                             ),
-                                            Obx(() =>
-                                                cartController.existQty
-                                                        .containsKey(
-                                                            wishlistController
-                                                                .favoriteList!
-                                                                .data[index]
-                                                                .productId)
-                                                    ? Container(
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            color:
-                                                                Colors.green),
-                                                        margin: const EdgeInsets
-                                                                .only(
-                                                            bottom: 10, top: 8),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(5),
-                                                        child: Text(
-                                                          'already in cart',
-                                                          style: subtitleStyle
-                                                              .copyWith(
+                                          ),
+                                          Obx(
+                                              () =>
+                                                  cartController.existQty
+                                                          .containsKey(
+                                                              wishlistController
+                                                                  .favoriteList!
+                                                                  .data[index]
+                                                                  .productId)
+                                                      ? Container(
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
                                                                   color:
-                                                                      whiteColor),
-                                                        ),
-                                                      )
-                                                    : Container(
-                                                        margin: const EdgeInsets
-                                                                .only(
-                                                            bottom: 10, top: 8),
-                                                        decoration: BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            color:
-                                                                secondaryColor,
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                  offset:
-                                                                      const Offset(
-                                                                          3, 3),
-                                                                  spreadRadius:
-                                                                      1,
-                                                                  blurRadius: 3,
-                                                                  color:
-                                                                      greyColor)
-                                                            ]),
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            showModalBottomSheet(
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return Container(
-                                                                    padding:
-                                                                        const EdgeInsets.fromLTRB(
-                                                                            20,
-                                                                            10,
-                                                                            20,
-                                                                            10),
-                                                                    width: Get
-                                                                        .width,
-                                                                    height: 250,
-                                                                    decoration: BoxDecoration(
-                                                                        color:
-                                                                            whiteColor,
-                                                                        borderRadius: const BorderRadius.only(
-                                                                            topLeft:
-                                                                                Radius.circular(15),
-                                                                            topRight: Radius.circular(15))),
-                                                                    child:
-                                                                        Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Order Information',
-                                                                          style:
-                                                                              subtitleStyle.copyWith(fontWeight: FontWeight.w700),
-                                                                        ),
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(top: 15),
-                                                                          child:
-                                                                              Row(
+                                                                      secondaryColor),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                              color: bgColor),
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 10,
+                                                                  top: 8),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5),
+                                                          child: Text(
+                                                            'In cart',
+                                                            style: subtitleStyle
+                                                                .copyWith(
+                                                                    color:
+                                                                        secondaryColor),
+                                                          ),
+                                                        )
+                                                      : Container(
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 10,
+                                                                  top: 8),
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color:
+                                                                  secondaryColor,
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                    offset:
+                                                                        const Offset(
+                                                                            3, 3),
+                                                                    spreadRadius:
+                                                                        1,
+                                                                    blurRadius:
+                                                                        3,
+                                                                    color:
+                                                                        greyColor)
+                                                              ]),
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              showModalBottomSheet(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Container(
+                                                                      padding: const EdgeInsets
+                                                                              .fromLTRB(
+                                                                          20,
+                                                                          10,
+                                                                          20,
+                                                                          10),
+                                                                      width: Get
+                                                                          .width,
+                                                                      height:
+                                                                          250,
+                                                                      decoration: BoxDecoration(
+                                                                          color:
+                                                                              whiteColor,
+                                                                          borderRadius: const BorderRadius.only(
+                                                                              topLeft: Radius.circular(15),
+                                                                              topRight: Radius.circular(15))),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Order Information',
+                                                                            style:
+                                                                                subtitleStyle.copyWith(fontWeight: FontWeight.w700),
+                                                                          ),
+                                                                          Row(
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.spaceBetween,
                                                                             children: [
@@ -357,70 +365,62 @@ class WishlistPage extends StatelessWidget {
                                                                                   )),
                                                                             ],
                                                                           ),
-                                                                        ),
-                                                                        const Spacer(),
-                                                                        GestureDetector(
-                                                                          onTap:
-                                                                              () {
-                                                                            cartController.existQty.containsKey(wishlistController.favoriteList!.data[index].productId)
-                                                                                ? Get.snackbar(
-                                                                                    'Ooops!',
-                                                                                    'You already add this item on cart before',
-                                                                                    snackPosition: SnackPosition.BOTTOM,
-                                                                                    margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
-                                                                                    backgroundColor: redColor,
-                                                                                    colorText: whiteColor,
-                                                                                  )
-                                                                                : cartController.addToCart(wishlistController.favoriteList!.data[index].productId, 'new').then((value) => Get.to(() => const CartPage()));
-                                                                          },
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                50,
-                                                                            padding:
-                                                                                const EdgeInsets.symmetric(horizontal: 10),
-                                                                            width:
-                                                                                Get.width,
-                                                                            decoration:
-                                                                                BoxDecoration(color: secondaryColor, borderRadius: BorderRadius.circular(10)),
+                                                                          GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              cartController.existQty.containsKey(wishlistController.favoriteList!.data[index].productId)
+                                                                                  ? Get.snackbar(
+                                                                                      'Ooops!',
+                                                                                      'You already add this item on cart before',
+                                                                                      snackPosition: SnackPosition.BOTTOM,
+                                                                                      margin: const EdgeInsets.only(bottom: 5, left: 5, right: 5),
+                                                                                      backgroundColor: redColor,
+                                                                                      colorText: whiteColor,
+                                                                                    )
+                                                                                  : cartController.addToCart(wishlistController.favoriteList!.data[index].productId, 'new').then((value) => Get.to(() => const CartPage()));
+                                                                            },
                                                                             child:
-                                                                                Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: [
-                                                                                Text(
-                                                                                  'Add to cart',
-                                                                                  style: subtitleStyle.copyWith(color: whiteColor),
-                                                                                ),
                                                                                 Container(
-                                                                                  height: 30,
-                                                                                  width: 30,
-                                                                                  decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(10)),
-                                                                                  child: const Icon(Icons.chevron_right),
-                                                                                )
-                                                                              ],
+                                                                              height: 50,
+                                                                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                                                                              width: Get.width,
+                                                                              decoration: BoxDecoration(color: secondaryColor, borderRadius: BorderRadius.circular(10)),
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    'Add to cart',
+                                                                                    style: subtitleStyle.copyWith(color: whiteColor),
+                                                                                  ),
+                                                                                  Container(
+                                                                                    height: 30,
+                                                                                    width: 30,
+                                                                                    decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(10)),
+                                                                                    child: const Icon(Icons.chevron_right),
+                                                                                  )
+                                                                                ],
+                                                                              ),
                                                                             ),
                                                                           ),
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  );
-                                                                });
-                                                          },
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(5),
-                                                            child: Icon(
-                                                              Icons
-                                                                  .shopping_cart,
-                                                              color:
-                                                                  primaryColor,
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  });
+                                                            },
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(5),
+                                                              child: Icon(
+                                                                Icons
+                                                                    .shopping_cart,
+                                                                color:
+                                                                    primaryColor,
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      )),
-                                          ],
-                                        ),
+                                                        )),
+                                        ],
                                       ),
                                     );
                                   },

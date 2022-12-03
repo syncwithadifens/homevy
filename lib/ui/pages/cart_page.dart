@@ -104,7 +104,6 @@ class CartPage extends StatelessWidget {
                               Positioned(
                                 bottom: 0,
                                 child: Container(
-                                  height: Get.height * 0.25,
                                   width: Get.width,
                                   padding:
                                       const EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -204,12 +203,13 @@ class CartPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      const Spacer(),
                                       GestureDetector(
                                         onTap: () =>
                                             Get.to(() => const CheckoutPage()),
                                         child: Container(
                                           height: 50,
+                                          margin:
+                                              const EdgeInsets.only(top: 20),
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 10),
                                           width: Get.width,

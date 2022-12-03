@@ -25,6 +25,7 @@ class ReviewController extends GetxController {
         isLoading.value = false;
       }
     } catch (e) {
+      isLoading.value = false;
       debugPrint(e.toString());
     }
   }

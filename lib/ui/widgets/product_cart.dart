@@ -35,93 +35,98 @@ class ProductCart extends StatelessWidget {
             borderRadius: BorderRadius.circular(10), color: whiteColor),
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Row(
+            child: Stack(
               children: [
-                GestureDetector(
-                  onTap: () =>
-                      Get.to(DetailPage(productDetail: cardList.product)),
-                  child: Container(
-                    height: 90,
-                    width: 90,
-                    margin: const EdgeInsets.only(right: 8),
-                    decoration: BoxDecoration(
-                        color: bgColor,
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: NetworkImage(cardList.product.image),
-                            fit: BoxFit.cover)),
-                  ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () =>
+                          Get.to(DetailPage(productDetail: cardList.product)),
+                      child: Container(
+                        height: 90,
+                        width: 100,
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: BoxDecoration(
+                            color: bgColor,
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                                image: NetworkImage(cardList.product.image),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () => Get.to(
+                                  DetailPage(productDetail: cardList.product)),
+                              child: Text(
+                                cardList.product.name,
+                                style: subtitleStyle.copyWith(
+                                    fontWeight: FontWeight.w700),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Text(
+                              '${cardList.product.stock} remaining',
+                              style: subtitleStyle.copyWith(
+                                fontSize: 12,
+                                color: greyColor,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const Spacer(),
+                            Text(
+                              NumberFormat.currency(
+                                      locale: 'id',
+                                      symbol: 'Rp',
+                                      decimalDigits: 2)
+                                  .format(cardList.product.harga),
+                              style: subtitleStyle.copyWith(
+                                  color: primaryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                Positioned(
+                  right: 0,
+                  bottom: 10,
+                  child: Container(
+                    width: 90,
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: lightGreyColor),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: () => Get.to(
-                              DetailPage(productDetail: cardList.product)),
+                            onTap: () => cartController
+                                .decreaseQuantity(cardList.productId),
+                            child: Icon(Icons.remove, color: redColor)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
-                            cardList.product.name,
-                            style: subtitleStyle.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.w700),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                              '${cartController.existQty[cardList.productId]}'),
                         ),
-                        Text(
-                          '${cardList.product.stock} remaining',
-                          style: subtitleStyle.copyWith(
-                            fontSize: 12,
-                            color: greyColor,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const Spacer(),
-                        Text(
-                          NumberFormat.currency(
-                                  locale: 'id', symbol: 'Rp', decimalDigits: 2)
-                              .format(cardList.product.harga),
-                          style: subtitleStyle.copyWith(
-                              color: primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700),
-                        )
+                        GestureDetector(
+                            onTap: () => cartController
+                                .increaseQuantity(cardList.productId),
+                            child: const Icon(Icons.add, color: Colors.green))
                       ],
                     ),
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10, right: 8),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: lightGreyColor),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                              onTap: () => cartController
-                                  .decreaseQuantity(cardList.productId),
-                              child: Icon(Icons.remove, color: redColor)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                                '${cartController.existQty[cardList.productId]}'),
-                          ),
-                          GestureDetector(
-                              onTap: () => cartController
-                                  .increaseQuantity(cardList.productId),
-                              child: const Icon(Icons.add, color: Colors.green))
-                        ],
-                      ),
-                    ),
-                  ],
-                )
               ],
             )),
       ),
