@@ -27,7 +27,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       decoration: BoxDecoration(color: bgColor, boxShadow: [
         BoxShadow(
           color: bgColor,
-          offset: const Offset(0, -5),
+          offset: const Offset(0, -2),
           spreadRadius: 1,
           blurRadius: 8,
         )

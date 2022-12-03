@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homevy/theme/styles.dart';
 
 class HomeCategoryItem extends StatelessWidget {
@@ -15,51 +16,51 @@ class HomeCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 123,
-      width: MediaQuery.of(context).size.width - (2 * 24),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          Align(
-            alignment: Alignment.bottomCenter,
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: Container(
-              height: 102,
+              padding: const EdgeInsets.only(left: 180, right: 8),
+              height: 100,
+              width: Get.width,
               decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Row(
+                  color: whiteColor, borderRadius: BorderRadius.circular(20)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    width: 150,
+                  Text(
+                    title,
+                    style: subtitleStyle.copyWith(
+                        fontWeight: FontWeight.w600, fontSize: 18),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        title,
-                        style: blackTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: semibold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        subtitle,
-                        style: greyTextStyle.copyWith(fontWeight: semibold),
-                      ),
-                    ],
+                  Text(
+                    subtitle,
+                    style: subtitleStyle.copyWith(color: greyColor),
                   )
                 ],
               ),
             ),
           ),
-          Image.network(
-            imageUrl,
-            height: 148,
+          Positioned(
+            top: 0,
+            left: 15,
+            child: SizedBox(
+              height: 100,
+              width: 150,
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.fill,
+              ),
+            ),
           )
         ],
       ),

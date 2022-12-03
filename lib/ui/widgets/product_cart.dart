@@ -29,7 +29,7 @@ class ProductCart extends StatelessWidget {
       ),
       child: Container(
         margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-        height: 100,
+        height: 110,
         width: Get.width,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: whiteColor),
@@ -43,15 +43,19 @@ class ProductCart extends StatelessWidget {
                       onTap: () =>
                           Get.to(DetailPage(productDetail: cardList.product)),
                       child: Container(
-                        height: 90,
+                        height: double.infinity,
                         width: 100,
-                        margin: const EdgeInsets.only(right: 8),
+                        margin:
+                            const EdgeInsets.only(right: 8, top: 5, bottom: 5),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: bgColor,
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                image: NetworkImage(cardList.product.image),
-                                fit: BoxFit.cover)),
+                          color: bgColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.network(
+                          cardList.product.image,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                     Expanded(

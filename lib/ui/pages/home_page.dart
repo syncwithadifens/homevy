@@ -97,7 +97,6 @@ class HomePage extends StatelessWidget {
                         ? Expanded(
                             child: Center(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Lottie.asset('assets/notfound.json',
                                       repeat: false, width: 200, height: 200),
@@ -109,34 +108,37 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                           )
-                        : CarouselSlider(
-                            items: [
-                              for (var i = 0;
-                                  i <
-                                      productController
-                                          .productData!.data.products.length;
-                                  i++)
-                                GestureDetector(
-                                  onTap: () => Get.to(() => DetailPage(
-                                        productDetail: productController
-                                            .productData!.data.products[i],
-                                      )),
-                                  child: HomeCategoryItem(
-                                    title: productController
-                                        .productData!.data.products[i].name,
-                                    subtitle:
-                                        'Stock: ${productController.productData!.data.products[i].stock}',
-                                    imageUrl: productController
-                                        .productData!.data.products[i].image,
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: CarouselSlider(
+                              items: [
+                                for (var i = 0;
+                                    i <
+                                        productController
+                                            .productData!.data.products.length;
+                                    i++)
+                                  GestureDetector(
+                                    onTap: () => Get.to(() => DetailPage(
+                                          productDetail: productController
+                                              .productData!.data.products[i],
+                                        )),
+                                    child: HomeCategoryItem(
+                                      title: productController
+                                          .productData!.data.products[i].name,
+                                      subtitle:
+                                          'Stock: ${productController.productData!.data.products[i].stock}',
+                                      imageUrl: productController
+                                          .productData!.data.products[i].image,
+                                    ),
                                   ),
-                                ),
-                            ],
-                            options: CarouselOptions(
-                                height: 150,
-                                autoPlay: true,
-                                enableInfiniteScroll: false,
-                                viewportFraction: 1,
-                                autoPlayInterval: const Duration(seconds: 6)),
+                              ],
+                              options: CarouselOptions(
+                                  height: 130,
+                                  autoPlay: true,
+                                  enableInfiniteScroll: false,
+                                  viewportFraction: 1,
+                                  autoPlayInterval: const Duration(seconds: 6)),
+                            ),
                           )),
                 Container(
                   margin: const EdgeInsets.only(
@@ -152,158 +154,147 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Obx(() => productController.isLoading.value
-                    ? Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10, left: 20, right: 20),
-                          child: GridView.builder(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            itemCount: 4,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    mainAxisExtent: 200),
-                            itemBuilder: (context, index) {
-                              return Shimmer(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: lightGreyColor,
+                Obx(
+                  () => productController.isLoading.value
+                      ? Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10, left: 20, right: 20),
+                            child: GridView.builder(
+                              padding: const EdgeInsets.only(bottom: 15),
+                              itemCount: 4,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 20,
+                                      mainAxisSpacing: 20,
+                                      mainAxisExtent: 200),
+                              itemBuilder: (context, index) {
+                                return Shimmer(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: lightGreyColor,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      )
-                    : productController.productData == null ||
-                            productController.productData!.data.products.isEmpty
-                        ? Expanded(
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Lottie.asset('assets/notfound.json',
-                                      repeat: false, width: 200, height: 200),
-                                  Text(
-                                    'Product not found',
-                                    style: titleStyle,
-                                  )
-                                ],
-                              ),
+                                );
+                              },
                             ),
-                          )
-                        : Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10, left: 20, right: 20),
-                              child: GridView.builder(
-                                padding: const EdgeInsets.only(bottom: 15),
-                                itemCount: productController
-                                    .productData!.data.products.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        crossAxisSpacing: 20,
-                                        mainAxisSpacing: 20,
-                                        mainAxisExtent: 200),
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(() => DetailPage(
+                          ),
+                        )
+                      : productController.productData == null ||
+                              productController
+                                  .productData!.data.products.isEmpty
+                          ? Expanded(
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    Lottie.asset('assets/notfound.json',
+                                        repeat: false, width: 200, height: 200),
+                                    Text(
+                                      'Product not found',
+                                      style: titleStyle,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10, left: 20, right: 20),
+                                child: GridView.builder(
+                                  padding: const EdgeInsets.only(bottom: 15),
+                                  itemCount: productController
+                                      .productData!.data.products.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 20,
+                                          mainAxisSpacing: 20,
+                                          mainAxisExtent: 200),
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () => Get.to(() => DetailPage(
                                           productDetail: productController
                                               .productData!
                                               .data
-                                              .products[index],
-                                        )),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: whiteColor,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              offset: const Offset(0, 6),
-                                              spreadRadius: 1,
-                                              blurRadius: 3,
-                                              color: greyColor),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(20),
-                                              child: Image.network(
-                                                  productController
-                                                      .productData!
-                                                      .data
-                                                      .products[index]
-                                                      .image),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5, bottom: 10, right: 5),
-                                            child: Row(
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      productController
+                                              .products[index])),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: whiteColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                offset: const Offset(0, 6),
+                                                spreadRadius: 1,
+                                                blurRadius: 3,
+                                                color: greyColor),
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 20,
+                                              right: 20,
+                                              top: 20,
+                                              bottom: 10),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  child: Image.network(
+                                                    productController
+                                                        .productData!
+                                                        .data
+                                                        .products[index]
+                                                        .image,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                productController.productData!
+                                                    .data.products[index].name,
+                                                style: subtitleStyle.copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text(
+                                                  NumberFormat.currency(
+                                                          locale: 'id',
+                                                          symbol: 'Rp',
+                                                          decimalDigits: 2)
+                                                      .format(productController
                                                           .productData!
                                                           .data
                                                           .products[index]
-                                                          .name,
-                                                      style: subtitleStyle
-                                                          .copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 5),
-                                                      child: Text(
-                                                        NumberFormat.currency(
-                                                                locale: 'id',
-                                                                symbol: 'Rp',
-                                                                decimalDigits:
-                                                                    2)
-                                                            .format(
-                                                                productController
-                                                                    .productData!
-                                                                    .data
-                                                                    .products[
-                                                                        index]
-                                                                    .harga),
-                                                        style: subtitleStyle
-                                                            .copyWith(
-                                                                color:
-                                                                    primaryColor,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                          .harga),
+                                                  style: subtitleStyle.copyWith(
+                                                      color: primaryColor,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w700),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
-                          )),
+                ),
               ],
             ),
           ),

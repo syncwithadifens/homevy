@@ -35,7 +35,7 @@ class SplashPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  'your perfect room',
+                  'create your perfect room',
                   style: taglineStyle,
                 ),
               )

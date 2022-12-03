@@ -88,31 +88,31 @@ class DetailPage extends StatelessWidget {
                               fontSize: 22, fontWeight: FontWeight.bold),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    NumberFormat.currency(
-                                            locale: 'id',
-                                            symbol: 'Rp',
-                                            decimalDigits: 2)
-                                        .format(productDetail.harga),
-                                    style: subtitleStyle.copyWith(
-                                        color: primaryColor,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700),
-                                  ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 8),
+                          child: SizedBox(
+                            height: 150,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  NumberFormat.currency(
+                                          locale: 'id',
+                                          symbol: 'Rp',
+                                          decimalDigits: 2)
+                                      .format(productDetail.harga),
+                                  style: subtitleStyle.copyWith(
+                                      color: primaryColor,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                              ),
-                              Expanded(
-                                child: Image.network(
+                                Image.network(
                                   productDetail.image,
+                                  width: 150,
+                                  fit: BoxFit.fill,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Container(
@@ -227,12 +227,15 @@ class DetailPage extends StatelessWidget {
                                 Divider(
                                   color: blackColor,
                                 ),
-                                const Text("Description:\n",
+                                const Text("Description:",
                                     style: TextStyle(fontSize: 16)),
-                                Text(
-                                  productDetail.deskripsi,
-                                  style: const TextStyle(fontSize: 14),
-                                  textAlign: TextAlign.justify,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text(
+                                    productDetail.deskripsi,
+                                    style: const TextStyle(fontSize: 14),
+                                    textAlign: TextAlign.justify,
+                                  ),
                                 ),
                               ]),
                         ),
