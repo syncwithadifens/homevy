@@ -66,7 +66,8 @@ class CartPage extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       ),
                     )
-                  : cartController.cartData!.data.isEmpty
+                  : cartController.cartData == null ||
+                          cartController.cartData!.data.isEmpty
                       ? Expanded(
                           child: Center(
                           child: Column(

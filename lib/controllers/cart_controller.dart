@@ -51,6 +51,7 @@ class CartController extends GetxController {
       final response = await cartService.removeCartItem(cartId);
       if (response == 'Success') {
         total.value = 0;
+        existQty.clear();
         getCart();
       }
     } catch (e) {
