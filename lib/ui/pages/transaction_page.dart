@@ -100,26 +100,17 @@ class TransactionPage extends StatelessWidget {
                     )
                   : TabBarView(children: [
                       transactionController.transactionList!.data!.isEmpty
-                          ? RefreshIndicator(
-                              onRefresh: () =>
-                                  transactionController.getTransaction(),
-                              child: SingleChildScrollView(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Lottie.asset('assets/unpaid.json',
-                                          repeat: false,
-                                          width: 300,
-                                          height: 300),
-                                      Text(
-                                        'Transaction is empty',
-                                        style: titleStyle,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                          ? Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Lottie.asset('assets/unpaid.json',
+                                      repeat: false, width: 300, height: 300),
+                                  Text(
+                                    'Transaction is empty',
+                                    style: titleStyle,
+                                  )
+                                ],
                               ),
                             )
                           : RefreshIndicator(
