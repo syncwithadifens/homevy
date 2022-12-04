@@ -234,7 +234,6 @@ class DetailPage extends StatelessWidget {
                                   child: Text(
                                     productDetail.deskripsi,
                                     style: const TextStyle(fontSize: 14),
-                                    textAlign: TextAlign.justify,
                                   ),
                                 ),
                               ]),
@@ -261,7 +260,7 @@ class DetailPage extends StatelessWidget {
                             margin: const EdgeInsets.only(top: 10),
                             height: 50,
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            width: Get.width,
+                            width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 color: secondaryColor,
                                 borderRadius: BorderRadius.circular(10)),

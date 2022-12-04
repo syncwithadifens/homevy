@@ -47,7 +47,7 @@ class TransactionPage extends StatelessWidget {
                   tabs: [
                     Tab(
                       child: Container(
-                        width: 100,
+                        width: MediaQuery.of(context).size.width * 0.3,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: secondaryColor,
@@ -59,7 +59,7 @@ class TransactionPage extends StatelessWidget {
                     ),
                     Tab(
                       child: Container(
-                        width: 100,
+                        width: MediaQuery.of(context).size.width * 0.3,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: greyColor,
@@ -71,7 +71,7 @@ class TransactionPage extends StatelessWidget {
                     ),
                     Tab(
                       child: Container(
-                        width: 100,
+                        width: MediaQuery.of(context).size.width * 0.3,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: Colors.green,
@@ -83,7 +83,7 @@ class TransactionPage extends StatelessWidget {
                     ),
                     Tab(
                       child: Container(
-                        width: 100,
+                        width: MediaQuery.of(context).size.width * 0.3,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             color: redColor,

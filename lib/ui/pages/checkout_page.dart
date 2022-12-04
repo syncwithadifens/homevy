@@ -167,7 +167,7 @@ class CheckoutPage extends StatelessWidget {
                 height: 50,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                width: Get.width,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                     color: secondaryColor,
                     borderRadius: BorderRadius.circular(10)),
