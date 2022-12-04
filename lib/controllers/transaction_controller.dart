@@ -54,16 +54,17 @@ class TransactionController extends GetxController {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: () => Get.to(() => const HomePage()),
+                          onTap: () => Get.offAll(() => const HomePage()),
                           child: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                   color: bgColor,
                                   borderRadius: BorderRadius.circular(10)),
-                              child: const Text('Maybe later')),
+                              child: const Text('Later')),
                         ),
                         GestureDetector(
-                          onTap: () => Get.to(() => const TransactionPage()),
+                          onTap: () =>
+                              Get.offAll(() => const TransactionPage()),
                           child: Container(
                               margin: const EdgeInsets.only(left: 8),
                               padding: const EdgeInsets.all(8),
