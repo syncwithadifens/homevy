@@ -40,6 +40,7 @@ Project ini dibuat untuk pengumpulan final project kegiatan kampus merdeka NF Co
 | Transaction Page                                      | Rate Page                                             |
 | ![Transaction Page](assets/github-prev/orderview.png) | ![Rate Page](assets/github-prev/rateview.png)         |
 | Rate Field                                            | Profile Page                                          |
+| ![Rate Field](assets/github-prev/rate2view.png)       | ![Profile Page](assets/github-prev/profileview.png)   |
 
 ### Preview in Web
 
