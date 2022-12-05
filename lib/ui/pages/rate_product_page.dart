@@ -153,13 +153,21 @@ class RateProductPage extends StatelessWidget {
                                                         reviewController
                                                             .star.value = value,
                                                   )),
-                                              GestureDetector(
-                                                  onTap: () => reviewController
-                                                      .selectImg(),
-                                                  child: Icon(
-                                                    Icons.add_a_photo_outlined,
-                                                    color: primaryColor,
-                                                  ))
+                                              Obx(() => reviewController
+                                                      .isImgSelected.value
+                                                  ? const Icon(
+                                                      Icons.check,
+                                                      color: Colors.green,
+                                                    )
+                                                  : GestureDetector(
+                                                      onTap: () =>
+                                                          reviewController
+                                                              .selectImg(),
+                                                      child: Icon(
+                                                        Icons
+                                                            .add_a_photo_outlined,
+                                                        color: primaryColor,
+                                                      )))
                                             ],
                                           ),
                                           Padding(
