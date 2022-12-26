@@ -7,7 +7,7 @@ class ProductService {
   final apiUrl = AuthService.apiUrl;
 
   Future<ProductModel> getProductByCategory() async {
-    final response = await http.get(Uri.parse('$apiUrl/api/category/22'),
+    final response = await http.get(Uri.parse('$apiUrl/api/category/23'),
         headers: {'Authorization': 'Bearer ${AuthController.token}'});
     if (response.statusCode == 200) {
       return productModelFromJson(response.body);

@@ -5,7 +5,7 @@ import 'package:homevy/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static const apiUrl = 'https://api1.sib3.nurulfikri.com';
+  static const apiUrl = 'https://aki.nurulfikri.com';
 
   Future<UserModel> signInWithEmail(String email, String password) async {
     final response = await http.post(Uri.parse('$apiUrl/api/login'), body: {
