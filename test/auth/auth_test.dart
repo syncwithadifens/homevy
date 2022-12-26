@@ -18,7 +18,7 @@ void main() {
   test(
     'Successfully logged in user',
     () async {
-      expect(await authService.signInWithEmail('syncwadifens', '12345678'),
+      expect(await authService.signInWithEmail('afiv@gmail.com', 'afiv'),
           isA<UserModel>());
     },
   );
